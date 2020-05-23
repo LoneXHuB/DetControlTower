@@ -1,0 +1,58 @@
+﻿<Page x:Class="Emprunteur.ListeReservations"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Emprunteur"
+      mc:Ignorable="d" 
+       d:DesignHeight="530" d:DesignWidth="1080"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="ListeDemprunts" Loaded="PageLoaded">
+
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical">
+
+
+
+
+
+
+
+
+
+            <DataGrid x:Name="reservationDataGrid" SelectionUnit="FullRow" Visibility="Visible" Height="478" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}" MinColumnWidth="300" CanUserDeleteRows="False" CanUserResizeRows="False"  >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn DisplayIndex="0" Header="Barcode" Binding="{Binding idouv}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Pseudo" Binding="{Binding p}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Date de début " Binding="{Binding dated}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Date de fin" Binding="{Binding datef}" IsReadOnly="True"/>
+
+
+
+                </DataGrid.Columns>
+
+
+
+            </DataGrid>
+
+            <Grid Background="#555" Height="53">
+
+                <Button x:Name="reserverButton" Grid.Column="0" Content="Annuler Réservation" Foreground="White" FontWeight="Bold" BorderThickness="0" BorderBrush="{x:Null}" Height="53" Click="SupprimerButton_Click" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFCD0606" Offset="0"/>
+                            <GradientStop Color="#FF7E0101" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+
+
+            </Grid>
+
+        </StackPanel>
+
+
+    </Grid>
+</Page>

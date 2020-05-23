@@ -1,0 +1,48 @@
+﻿<Page x:Class="Emprunteur.ModifierCompte"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Emprunteur"
+      mc:Ignorable="d" 
+       d:DesignHeight="530" d:DesignWidth="1080"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="ModifierCompte" Loaded="PageLoaded">
+
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical">
+
+
+
+            <DataGrid x:Name="comptesDataGrid" SelectionUnit="FullRow" Height="477" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}" MinColumnWidth="137" CanUserDeleteRows="False" CanUserResizeRows="False" >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="pseudo" Binding="{Binding pseudo}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="nom" Binding="{Binding nom}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="email" Binding="{Binding email}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="specialité" Binding="{Binding specialite}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="niveau" Binding="{Binding niveau}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="numéro de carte" Binding="{Binding numC}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="grade" Binding="{Binding grade}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="matricule" Binding="{Binding mat}" IsReadOnly="True"/>
+
+                </DataGrid.Columns>
+
+
+
+            </DataGrid>
+
+
+            <Grid Background="#555" Height="53">
+               
+
+                <Button Background="#999" Content="Modifier" FontWeight="Bold" BorderThickness="0" BorderBrush="{x:Null}" Height="53" Click="ModifierButton_Click" />
+                
+            </Grid>
+
+        </StackPanel>
+
+
+    </Grid>
+</Page>
+

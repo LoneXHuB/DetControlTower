@@ -1,0 +1,185 @@
+﻿<Page x:Class="WpfApp1.Proforma"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="530" d:DesignWidth="1030"
+      xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="Proforma" Loaded="PageLoaded">
+
+
+    <Grid Background="White" >
+        <StackPanel Orientation="Horizontal"  Background="#FF272727" Margin="0,0,412,473">
+            <Label VerticalAlignment="Center" Content="Réfference" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
+            <TextBox x:Name="refInput" Width="250" Margin="20 0 40 0" Height="25" Background="White" TextChanged="RefferenceFilter_Changed" />
+            <Button Height="56" Width="183" Content="Ajouter" Background="#FF0CA80C" FontWeight="DemiBold" Foreground="White" Click="AddToCart_Click" Margin="37,0,0,0" BorderBrush="#FF21F32B"/>
+        </StackPanel>
+        <DataGrid x:Name="MachinesDataGrid"  SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False" Margin="0,57,412,250" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="50" Header="Id" Binding="{Binding id}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="120" Header="Référence" Binding="{Binding ref}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="120" Header="Catégorie" Binding="{Binding categ}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="100" Header="Fournisseur" Binding="{Binding namef}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="90" Header="Etat" Binding="{Binding etat}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="100" Header="Prix" Binding="{Binding pdv ,StringFormat=C}" IsReadOnly="True"/>
+
+            </DataGrid.Columns>
+
+
+
+        </DataGrid>
+        <StackPanel Background="#FFFAFAFA" Margin="0,280,412,0">
+            <StackPanel Orientation="Horizontal" Height="42" Background="#FFC5C5C5" >
+                <Label Content="Panier" FontSize="16" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+            <DataGrid x:Name="CartDataGrid" Height="172" AutoGenerateColumns="False"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="120" Header="Référence" Binding="{Binding Refference}" IsReadOnly="True"/>
+                    <DataGridTextColumn Width="335" Header="Désignation" Binding="{Binding Designation}" IsReadOnly="True"/>
+                    <DataGridTextColumn Width="100"  Header="prix" Binding="{Binding Pdv,StringFormat=C}" IsReadOnly="True" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal"  Background="#FF272727" Margin="0,0,0,473" Height="37">
+                <Label VerticalAlignment="Center" Content="Remise" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
+                <TextBox x:Name="remiseInput" Padding="0" TextAlignment="Center" Text="0" Width="90" Margin="20,6,40,6" Height="25" Background="White"  />
+
+                <Label VerticalAlignment="Center" Content="Droit Timbre" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
+                <TextBox x:Name="timbreInput" Padding="0" Text="0" TextAlignment="Center" Width="83" Margin="20,6,40,6" Height="25" Background="White"  />
+
+                <Label VerticalAlignment="Center" Content="Garantie" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
+                <ComboBox x:Name="garantieInput"  Width="58" Margin="20,6,40,6" Height="25" Background="White" SelectionChanged="GarantieChanged"  >
+                    <ComboBoxItem IsSelected="True" Content="3 Mois"/>
+                    <ComboBoxItem Content="6 Mois"/>
+                    <ComboBoxItem Content="12 Mois"/>
+                </ComboBox>
+
+            </StackPanel>
+
+        </StackPanel>
+
+
+
+        <StackPanel Margin="618,0,0,0" Background="#FFFAFAFA"  >
+
+
+            <TextBlock Text="Information Client" HorizontalAlignment="Center" Panel.ZIndex="2" FontSize="22" FontWeight="Bold" Foreground="#FF6E6C6C" Margin="0,10,0,0" />
+            <Grid x:Name="ajouterGrid" Margin="6,10" Width="400" Height="429" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+
+
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="nameRow" Visibility="Collapsed">
+                    <Label Grid.Row="0"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Nom" FontSize="16" />
+                    <TextBox x:Name="nameInput" Padding="0" BorderThickness="1" Margin="44,5,50,5" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"   x:Name="activityRow" Visibility="Collapsed">
+                    <Label Grid.Row="1"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Activité" FontSize="16" />
+                    <ComboBox x:Name="activityInput" Padding="0" BorderThickness="1" Margin="27,5,50,5" Height="25" Width="250" Background="White" Foreground="#FF343333" HorizontalAlignment="Right" SelectionChanged="ActivityChanged" >
+                        <ComboBoxItem x:Name="artisant" Content="Artisant"/>
+                        <ComboBoxItem Content="Commerçant"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="addressRow" Visibility="Collapsed">
+                    <Label Grid.Row="2"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Adrèsse" FontSize="16" />
+                    <TextBox x:Name="addressInput" BorderThickness="1" Padding="0" Margin="24,0,50,0" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+
+                </StackPanel>
+
+
+
+                <Label Grid.Row="3" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Email" FontSize="16" />
+                <TextBox x:Name="emailInput" Grid.Row="3" CharacterCasing="Lower" BorderThickness="1" Padding="0" Margin="100,6,0,4" Height="25" Width="224" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Left"
+                          behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding ClientList}"/>
+
+                <Button x:Name="newClientButton" Click="NewClientButton_Click" Grid.Row="3" Panel.ZIndex="4" HorizontalAlignment="Right" Padding="0 0" Background="#FF0CA80C" Height="35" Width="35" Margin="0,0,10,0">
+                    <materialDesign:PackIcon Height="35"  Width="35" Margin="0 0" Foreground="white" Panel.ZIndex="5" Kind="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Button>
+
+                <Button x:Name="oldClientButton" Visibility="Collapsed" Click="OldClientButton_Click" Grid.Row="3" Panel.ZIndex="4" HorizontalAlignment="Right" Padding="0 0" Background="#FFEC0F0F" Height="35" Width="35" Margin="0,2,10,2" BorderBrush="Red">
+                    <materialDesign:PackIcon  Height="35" Width="35" Margin="0 0" Foreground="white" Panel.ZIndex="5" Kind="Minus" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </Button>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="mobileRow" Visibility="Collapsed">
+                    <Label Grid.Row="4"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Mobile" FontSize="16" />
+
+                    <TextBox  x:Name="mobileInput" Padding="0"  Grid.Row="4" BorderThickness="1" Margin="35,0,50,0" Height="25" Width="250"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right"
+		                    />
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="nifRow" Visibility="Collapsed">
+                    <Label Grid.Row="5"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="N.I.F" FontSize="16" />
+                    <TextBox x:Name="nifInput"  Padding="0" Grid.Row="5" BorderThickness="1" Margin="55,0,50,0" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="regRow" Visibility="Collapsed">
+                    <Label  x:Name="regLabel" Grid.Row="6"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="N° Registre" FontSize="16" />
+                    <TextBox x:Name="regInput"  Text="" Padding="0" Grid.Row="6" Visibility="Collapsed" BorderThickness="1" Margin="8,0,50,0" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+
+                    <Label x:Name="cartArtLabel" Grid.Row="6"  Visibility="Visible" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="N° C.A" FontSize="16" />
+                    <TextBox x:Name="cartArtInput" Text="" Padding="0" Visibility="Visible" Grid.Row="7" BorderThickness="1" Margin="45,0,50,0" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+
+                </StackPanel>
+
+
+
+                <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="articleRow" Visibility="Collapsed">
+                    <Label Grid.Row="7"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="N° Article" FontSize="16" />
+                    <TextBox x:Name="articleInput" Padding="0"  Grid.Row="7" BorderThickness="1" Margin="24,0,50,0" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="activityCodeRow" Visibility="Collapsed">
+                    <Label Grid.Row="8"   HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Code Act." FontSize="16" />
+                    <TextBox x:Name="activityCodeInput" Padding="0"  Grid.Row="7" BorderThickness="1" Margin="24,0,50,0" Height="25" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center" x:Name="payementRow" Visibility="Visible">
+                    <Label    HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Méthode" FontSize="16" />
+                    <ComboBox x:Name="methodInput" Padding="0 3"  Grid.Row="7" BorderThickness="1" Margin="5,8,0,8" Height="25" Width="59"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" >
+                        <ComboBoxItem Content="Espèce" IsSelected="True"/>
+                        <ComboBoxItem Content="Chèque"/>
+                        <ComboBoxItem Content="Versement"/>
+                        <ComboBoxItem Content="Virement"/>
+                    </ComboBox>
+                    <TextBox x:Name="modPayInput"   Grid.Row="7" BorderThickness="1" Margin="5,6,0,5" Height="30" Width="130" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+
+                    <Label  HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Payé" FontSize="16" />
+                    <TextBox x:Name="payedInput" Padding="0" BorderThickness="1" Margin="12,5,0,5" Height="25" Width="50" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+                </StackPanel>
+
+
+
+
+
+
+
+
+            </Grid>
+
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Panel.ZIndex="3" Margin="618,481,0,0" Background="#FAFAFAFA" >
+            <Button   x:Name="AjouterBtn" HorizontalAlignment="Left" Margin="30 0" Foreground="WhiteSmoke" Content="Effectuer Proforma"  Background="#FF0CA80C" Height="30" Width="155"  BorderBrush="#FF4ADA3C" Click="ProformaButton_Click"/>
+            <Button   x:Name="ViderBtn"  HorizontalAlignment="Left"  Margin="20 0" Foreground="WhiteSmoke" Content="Vider"  Background="#FF7C7C7C" Height="30" Width="150"  BorderBrush="#FF868787" Click="ViderButton_Click"/>
+        </StackPanel>
+    </Grid>
+
+</Page>

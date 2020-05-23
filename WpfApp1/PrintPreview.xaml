@@ -1,0 +1,293 @@
+﻿<Window x:Name="printPrev" x:Class="WpfApp1.PrintPreview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Print Preview" Height="842" Width="595" WindowStartupLocation="CenterScreen" AllowsTransparency="False" WindowStyle="None" ResizeMode="CanResizeWithGrip" Background="White" Foreground="White" Cursor="Hand" Loaded="WindowLoaded">
+
+
+    <Grid  Background="White" Height="842" Width="595">
+        <Grid x:Name="LoadingCover" Visibility="Collapsed" Panel.ZIndex="10" Grid.RowSpan="2">
+
+
+            <Rectangle Fill="White" Panel.ZIndex="1" Opacity="0.7"  Grid.RowSpan="2" />
+
+            <TextBlock Text="Envoie de l'email..." FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Panel.ZIndex="1" Foreground="Gray" Opacity="0.7"  Grid.RowSpan="2" />
+
+
+        </Grid>
+
+        <Grid x:Name="printableGrid" Background="White" Height="842" Width="595">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="443*"/>
+                <RowDefinition Height="400*"/>
+            </Grid.RowDefinitions>
+
+
+
+            <StackPanel x:Name="printerControls" Panel.ZIndex="2" Visibility="Visible" Orientation="Horizontal" VerticalAlignment="Top" Height="40" Background="#EAEAEAEA">
+
+                <Button x:Name="cancelButton" HorizontalAlignment="Right" Width="40" Height="40" Padding="0 0" Background="{x:Null}" BorderBrush="{x:Null}" Click="CancelButton_Click">
+                    <materialDesign:PackIcon Kind="Cancel" Margin="0 0" Width="20" Height="20" Foreground="Red" />
+                </Button>
+                <Button x:Name="emailButton" HorizontalAlignment="Center" Width="40" Height="40" Margin="237 0" Padding="0 0" Background="{x:Null}" BorderBrush="{x:Null}" Click="EmailButton_Click" >
+                    <materialDesign:PackIcon Kind="Email" Margin="0 0" Width="20" Height="20" Foreground="#FF2196F3" />
+                </Button>
+
+                <Button x:Name="PrintButton" HorizontalAlignment="Left" Width="40" Height="40" Margin="0" Padding="0 0" Background="{x:Null}" BorderBrush="{x:Null}" Click="PrintButton_Click">
+                    <materialDesign:PackIcon Kind="Printer" Margin="0 0" Width="20" Height="20" Foreground="#FF2196F3" />
+                </Button>
+
+            </StackPanel>
+
+            <StackPanel Grid.RowSpan="2">
+                <StackPanel Orientation="Vertical" Width="198" Height="76" Panel.ZIndex="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+
+                    <Image Source="/Ressources/DET LOGO.png" Height="88" Margin="0,0,10,0"/>
+
+                </StackPanel>
+                <TextBlock Text="Distribution des Equipements" Width="200" Height="22" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="#AAA" FontFamily="Impact" FontWeight="DemiBold" FontSize="15"/>
+
+            </StackPanel>
+
+
+            <TextBlock x:Name="numFacture"  Text="Facture Proforma N° : " Width="339" HorizontalAlignment="Left" Margin="246,30,0,386" Background="#FFF4F4F5" Foreground="#555" FontFamily="Impact"  FontSize="20"/>
+
+            <ListView Panel.ZIndex="1" Margin="0,72,0,329">
+                <ListViewItem  Height="17" Padding="0 0" Width="180">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="R.C N° : " Width="50" HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                        <TextBlock Text="05 - B - 0805257" HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontFamily="SegoUi"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="21" Padding="0 0" Width="180">
+                    <StackPanel  Orientation="Horizontal">
+                        <TextBlock Text="NIS N°  : " Width="50" HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                        <TextBlock Text="000509200782742"  HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontFamily="SegoUi"/>
+                    </StackPanel>
+                </ListViewItem>
+
+
+            </ListView>
+
+
+
+            <ListView Panel.ZIndex="1" Margin="381,72,0,315">
+
+                <ListViewItem  Height="16" Padding="0 0" Width="180">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ART N° : " Width="50" HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                        <TextBlock Text="09200610207" HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontFamily="SegoUi"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Height="18" Padding="0 0" Width="180">
+                    <StackPanel  Orientation="Horizontal">
+                        <TextBlock Text="NIF N°  : " Width="50" HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                        <TextBlock Text="00050908052547"  HorizontalAlignment="Left" Background="#FFF4F4F5" Foreground="#555" FontSize="10" FontFamily="SegoUi"/>
+                    </StackPanel>
+                </ListViewItem>
+
+
+            </ListView>
+
+
+
+
+
+
+            <Rectangle Fill="{x:Null}" HorizontalAlignment="Left" Panel.ZIndex="0" Height="136" Margin="10,132,0,0" Stroke="DarkGray" VerticalAlignment="Top" Width="572"/>
+
+            <StackPanel Orientation="Horizontal" Margin="20,242,16,177">
+                <TextBlock Text="Activité : " Width="50" HorizontalAlignment="Left" FontSize="10" Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                <TextBlock x:Name="clientActivity" Text="data" FontSize="10"  HorizontalAlignment="Left"  Foreground="#555" FontFamily="SegoUi"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10,127,16,177">
+
+                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" Width="181">
+
+                    <ListViewItem Width="180">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Client : " Width="50" HorizontalAlignment="Left"  FontSize="11" Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="ClientName" Text="data" FontSize="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="120" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Width="180">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Mobile : " Width="50" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="clientMobile" Text="data" FontSize="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="120" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Width="180">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Email : " Width="50" HorizontalAlignment="Left" FontSize="10" Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="clientEmail" Text="data" FontSize="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="120" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+
+                </ListView>
+
+
+                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" Width="202" >
+                    <ListViewItem Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Adrèsse : "  HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="clientAddress" Text="data"  FontSize="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="130" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="N.I.F : " Width="44" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="clientNif" FontSize="10" Text="data" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="140" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="RC/CA : " Width="44" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="RegNumber" Text="data" FontSize="10"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="100" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+
+                </ListView>
+
+
+
+                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" >
+
+                    <ListViewItem Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="N° Article : " Width="54" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="clientArticle" Text="data" FontSize="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                       ScrollViewer.VerticalScrollBarVisibility= "Hidden"  MaxWidth="100" TextWrapping="Wrap"  
+                                       HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Date : " Width="54" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="date" Text="data"   HorizontalAlignment="Left"  FontSize="10" Foreground="#555" FontFamily="SegoUi"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="payment : " Width="48" HorizontalAlignment="Left" FontSize="10"   Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="paymentType" Text="data"   HorizontalAlignment="Left" FontSize="10" TextWrapping="Wrap" MaxWidth="120" Foreground="#555" FontFamily="SegoUi" Width="120" Height="44"/>
+                        </StackPanel>
+                    </ListViewItem>
+                   
+
+                </ListView>
+
+            </StackPanel>
+
+            <DataGrid x:Name="cartDataGrid" VerticalScrollBarVisibility="Disabled" FontSize="11"    AutoGenerateColumns="False" SelectionUnit="FullRow" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False" Margin="10,273,10,200" Grid.RowSpan="2" >
+
+                <DataGrid.Columns >
+
+
+                    <DataGridTextColumn Header="Ref." Binding="{Binding Refference}"/>
+
+                    <DataGridTextColumn Header="Designation" Binding="{Binding Designation}"  Width="300">
+                        <DataGridTextColumn.ElementStyle >
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        <DataGridTextColumn.EditingElementStyle>
+                            <Style TargetType="TextBox">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="AcceptsReturn" Value="true" />
+                            </Style>
+                        </DataGridTextColumn.EditingElementStyle>
+
+                    </DataGridTextColumn>
+
+
+                    <DataGridTextColumn Header="Quantité" Binding="{Binding Quantity}"/>
+                    <DataGridTextColumn Header="Prix Unitair HT" Binding="{Binding Pdv}"/>
+
+
+
+                </DataGrid.Columns>
+
+
+
+            </DataGrid>
+
+
+            <Grid Margin="410,268,0,50" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="100"/>
+                    <ColumnDefinition  Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+
+                </Grid.RowDefinitions>
+
+
+                <TextBlock Text="Total HT : " Grid.Column="0" Grid.Row="0" Width="50" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                <TextBlock x:Name="totalHt" Grid.Column="1" Grid.Row="0" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+
+                <TextBlock Text="Remise: " Grid.Column="0" Grid.Row="1" Width="50" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                <TextBlock x:Name="remise" Grid.Column="1" Grid.Row="1" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+
+                <TextBlock Text="Total HT2 : " Grid.Column="0" Grid.Row="2" Width="70" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                <TextBlock x:Name="totalHt2" Grid.Column="1" Grid.Row="2" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+
+                <TextBlock Text="TVA 19% : " Grid.Column="0" Grid.Row="3" Width="70" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                <TextBlock x:Name="tva" Grid.Column="1" Grid.Row="3" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" />
+
+                <TextBlock Text="Total TTC : " Grid.Column="0" Grid.Row="4" Width="50" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                <TextBlock x:Name="total" Grid.Column="1" Grid.Row="4" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+
+            </Grid>
+            <TextBlock Text="Montant en Lettres" FontFamily="SegoUi" FontWeight="Bold" FontSize="18" Height="20" Foreground="#666" Margin="10,205,0,175" Grid.Row="1"/>
+            <TextBlock x:Name="amountInLetters" Text="Hello,World !" FontFamily="SegoUi" FontSize="12" Foreground="#666" Margin="17,231,43,144" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
+
+            <Image x:Name="signature" Visibility="Collapsed" Panel.ZIndex="100" Source="/Ressources/Signature.png" Margin="362,168,-49,117" Grid.Row="1" RenderTransformOrigin="0.5,0.5"/>
+
+
+
+            <TextBlock Text="Offre valable 30 Jours" FontFamily="SegoUi" FontWeight="Bold" FontSize="18" Height="20" Foreground="#666" Margin="10,262.5,0,117" Grid.Row="1"/>
+
+            <TextBlock FontFamily="SegoUi" FontSize="12" Foreground="#666" Margin="20,286.5,278,35" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-0.855"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.485"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform><Run Text="Garantie"/><Run Text="  "/><Run Text="   "/><Run Text=" ."/><LineBreak/><Run Text="-La matière Première utilisée pour les essais est a "/><LineBreak/><Run Text="charge du client ."/><LineBreak/><Run Text="-Pour les machines Hydrauliques , l'huile est a charge"/><LineBreak/><Run Text=" du client."/></TextBlock>
+            <TextBlock Text="(x)" x:Name="garantie" FontSize="12" FontWeight="Bold" Foreground="#666" Margin="73,283.5,460,99" Grid.Row="1"/>
+
+
+
+            <TextBlock FontFamily="SegoUi" FontWeight="Bold" FontSize="10" Foreground="#666" Margin="90,369.5,90,0" Grid.Row="1"><Run Text="Zone d'activité N°3c,BP63G Sortie nord Boufarique Zip:09400 W.Blida Algerie"/><LineBreak/><Run Text="Tel: 025 28 39 22 /Fax : 0 25 28 39 24/Mobile:05 500 900 74/Mail : sermo.dz@gmail.com"/></TextBlock>
+
+        </Grid>
+    </Grid>
+</Window>

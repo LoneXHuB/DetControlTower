@@ -1,0 +1,159 @@
+﻿<Window x:Class="Emprunteur.EmprunteurWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Emprunteur"
+       
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="EmprunteurWindow" Height="600" Width="1080" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="White" Foreground="White" Cursor="Arrow">
+
+
+    <Window.Resources>
+        <Storyboard x:Key="Nav2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="Nav">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="50"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Nav">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="Nav">
+                <EasingDoubleKeyFrame KeyTime="0" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="DeployNav">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="Nav">
+                <EasingDoubleKeyFrame KeyTime="0" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideNav">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="Nav">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="50"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="Nav">
+            <BeginStoryboard Storyboard="{StaticResource Nav2}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="Nav">
+            <BeginStoryboard Storyboard="{StaticResource Nav}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="DeployNav">
+            <BeginStoryboard Storyboard="{StaticResource DeployNav}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="HideNav">
+            <BeginStoryboard Storyboard="{StaticResource HideNav}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid x:Name="XWINDOW" Cursor="Arrow" Background="LightGray" >
+        <Grid Height="70" VerticalAlignment="Top" Background="#FFB42019" >
+            <TextBlock FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Text="SERBES LEKTAB" Margin="362,16,514,17" FontFamily="Impact" Width="204" Cursor="Arrow">
+            </TextBlock>
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="userField" Text="UserName"  FontSize="18" VerticalAlignment="Center" Cursor="Arrow" />
+                <materialDesign:PopupBox  Margin="5" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+
+                    <StackPanel Width="150">
+                        <Button x:Name="ButtonLogout" Content="Déconnexion" Click="ButtonLogout_Click"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="600"  Width="1080">
+
+            <Frame Height="530" x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="50,70,0,0" Navigated="MainFrame_Navigated"/>
+        </Grid>
+
+        <Grid MouseEnter="ButtonDeployNav_Click" Width="50" HorizontalAlignment="Left" x:Name="Nav" MouseLeave="ButtonHideNav_Click">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8F1010" Offset="0"/>
+                    <GradientStop Color="#FF300404" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <StackPanel>
+                <Grid Height="150" Background="White">
+                    <Button x:Name="HideNav" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Collapsed" Click="ButtonHideNav_Click">
+                        <materialDesign:PackIcon Foreground="DimGray" Kind="ArrowLeft" Width="25" Height="25" />
+                    </Button>
+                    <Button x:Name="DeployNav" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonDeployNav_Click">
+                        <materialDesign:PackIcon Foreground="DimGray" Kind="Menu" Width="25" Height="25" />
+                    </Button>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <materialDesign:PackIcon  Kind="Person" Margin="10 13 0 0" VerticalAlignment="Top" Width="20" Height="25" />
+
+                    <TreeView Grid.Row="0" Name="treeView1"/>
+                    <Expander Grid.Row="1" Background="{x:Null}" Header="Gérer Compte" Cursor="Arrow" AllowDrop="True"  >
+
+                        <ListBox  Foreground="WhiteSmoke" SelectionChanged="GererOuvrage_Select">
+                            <ListBoxItem Height="35" Width="120" HorizontalAlignment="Center">Modifier Compte</ListBoxItem>
+
+                            <ListBoxItem Height="35"  Width="120" HorizontalAlignment="Center">Liste Réservations</ListBoxItem>
+
+                            <ListBoxItem Height="35"  Width="120" HorizontalAlignment="Center">Liste D'emprunts</ListBoxItem>
+                        </ListBox>
+
+                    </Expander>
+
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+
+                    <materialDesign:PackIcon  Kind="ViewDashboard" Margin="10 13 0 0" VerticalAlignment="Top" Width="20" Height="25" />
+
+                    <Expander Grid.Row="1" Background="{x:Null}" Header="Ouvrages" Cursor="Arrow" AllowDrop="True"  >
+
+                        <ListBox  Foreground="WhiteSmoke" SelectionChanged="GererOuvrage_Select">
+                            <ListBoxItem Height="35" Width="120" HorizontalAlignment="Center">Consulter Ouvrages</ListBoxItem>
+                        </ListBox>
+
+                    </Expander>
+
+
+                </StackPanel>
+
+
+
+
+                <ListView  ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Foreground="LightGray">
+
+                   
+                    <ListViewItem Height="70">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="QuestionMark" VerticalAlignment="Center" Width="25" Height="25" />
+                            <TextBlock Text="A propos" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+
+                <Grid Height="175" VerticalAlignment="Bottom">
+                    <TextBlock x:Name="Copyright" Visibility="Collapsed" VerticalAlignment="Bottom"  HorizontalAlignment="Center" Text="Copyright LoneX and Akmed tm" FontSize="9" Foreground="#FFBBB7B7"/>
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,89 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        
+       Title="MainWindow" Height="600" Width="1080" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="White" Foreground="White" Cursor="Arrow">
+    
+        
+    <Grid >
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF113066" Offset="0"/>
+                    <GradientStop Color="#FF030913" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <StackPanel Width="1080" Orientation="Horizontal" Height="150" VerticalAlignment="Top" >
+                <TextBlock Text="DET CONTROL TOWER" Margin="200 37 0 0" HorizontalAlignment="Center"  FontFamily="Impact" FontSize="75" Foreground="White"/>
+                <materialDesign:PackIcon Foreground="white" Kind="Gear" Margin="20 30 15 0" VerticalAlignment="Top" Width="100" Height="100" />
+                <Button Click="CloseButton_Click" Margin="80 5 15 0" BorderBrush="{x:Null}" VerticalAlignment="Top" Background="{x:Null}" HorizontalAlignment="Right" Width="50" Height="50">
+                <materialDesign:PackIcon  Foreground="white" Kind="Close" Margin="-15" HorizontalAlignment="Right" Width="50" Height="50" />
+                </Button>
+            </StackPanel>
+            <StackPanel Height="256" Width="500" Margin="0 90 0 0" VerticalAlignment="Center"  >
+
+                <Border  BorderThickness="0" Width="400" BorderBrush="#FFAAA7A7">
+                    <Grid Margin="10" Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <!-- 5-->
+
+                            <!--6-->
+
+                            <!-- 0-->
+                            <RowDefinition Height="40" />
+                            <!-- 1-->
+                            <RowDefinition Height="40" />
+                            <!-- 2-->
+                            <RowDefinition Height="25" />
+                            <!-- 3-->
+                            <RowDefinition Height="50" />
+                            <!-- 4-->
+                            <RowDefinition Height="20" />
+
+
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Foreground="White" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Utilisateur" FontSize="16" />
+                        <TextBox x:Name="usr" Grid.Row="0" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
+
+                        <Label Grid.Row="1" Foreground="White" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Password" FontSize="16" />
+                        <PasswordBox x:Name="pass" Grid.Row="1" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250"  Background="White" Foreground="#FF343333" HorizontalAlignment="Right" FontWeight="Bold" />
+
+                        <StackPanel x:Name="ExceptionErrorFlag" Visibility="Collapsed" HorizontalAlignment="Center" Grid.Row="4" Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="Yellow" Kind="Warning" Margin="10 13 15 0" VerticalAlignment="Top" Width="20" Height="25" />
+                            <TextBlock  Grid.Row="4" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="Erreur de Connection..." FontSize="9" Foreground="red"/>
+                        </StackPanel>
+                        <StackPanel x:Name="AuthentificationErrorFlag" Visibility="Collapsed" HorizontalAlignment="Center" Grid.Row="4" Orientation="Horizontal">
+                            <materialDesign:PackIcon Foreground="Yellow" Kind="Warning" Margin="10 13 15 0" VerticalAlignment="Top" Width="20" Height="25" />
+                            <TextBlock  Grid.Row="4" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="user ou mot de passe incorrect" FontSize="9" Foreground="red"/>
+                        </StackPanel>
+
+                        <Button Click="ConnectionButton_Click" x:Name="ConnectionButton" Grid.Row="2" Foreground="Black" Background="LightGray" Content="Connection" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="150" Margin="125,38,125,0" Grid.RowSpan="3"/>
+
+                        <TextBlock x:Name="Copyright" Grid.Row="5" VerticalAlignment="Top"  HorizontalAlignment="Center" Text="Copyright LoneX" FontSize="9" Foreground="#FFBBB7B7"/>
+
+                    </Grid>
+
+                </Border>
+
+
+
+
+            </StackPanel>
+
+        </StackPanel>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF320303" Offset="1"/>
+                <GradientStop Color="#FFC30000"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+    </Grid>
+</Window>
