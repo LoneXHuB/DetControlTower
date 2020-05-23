@@ -119,19 +119,30 @@
 
                     <Expander Grid.Row="1" Background="{x:Null}" Header="Gerer Machines" Cursor="Arrow" AllowDrop="True"  >
 
-						<ListBox  Foreground="WhiteSmoke" SelectionChanged="GererOuvrage_Select">
-							<ListBoxItem Height="35" Width="120" HorizontalAlignment="Center">Ajouter Machine</ListBoxItem>
-							<ListBoxItem Height="35"  Width="120" HorizontalAlignment="Center">Liste de prix</ListBoxItem>
-							<ListBoxItem Height="35" Width="120" HorizontalAlignment="Center">Ajouter pièce rech.</ListBoxItem>
-							<ListBoxItem Height="35"  Width="120" HorizontalAlignment="Center">Liste pièce rech.</ListBoxItem>
-						</ListBox>
+                        <ListBox  Foreground="WhiteSmoke" SelectionChanged="GererOuvrage_Select">
+                            <ListBoxItem Height="35" Width="120" HorizontalAlignment="Center">Ajouter Machine</ListBoxItem>
+                            <ListBoxItem Height="35"  Width="120" HorizontalAlignment="Center">Liste de prix</ListBoxItem>
+                        </ListBox>
 
                     </Expander>
-
-                   
-
-
+                
                 </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                
+                    <materialDesign:PackIcon  Kind="Hand" Margin="10 13 0 0" VerticalAlignment="Top" Width="20" Height="25" />
+                
+                    <Expander Grid.Row="1" Background="{x:Null}" Header="Intervention" Cursor="Arrow" AllowDrop="True"  >
+                        
+                        <ListBox  Foreground="WhiteSmoke" SelectionChanged="GererOuvrage_Select">
+                            <ListBoxItem Height="35"  HorizontalAlignment="Center">Facturer intervention</ListBoxItem>
+                            <ListBoxItem Height="35" HorizontalAlignment="Center">Créer tache</ListBoxItem>
+                        </ListBox>
+                        
+                    </Expander>
+                    
+                </StackPanel>
+                
 
                 <StackPanel Orientation="Horizontal">
 
@@ -157,7 +168,9 @@
                             <TextBlock Text="Proforma" VerticalAlignment="Center" Margin="20 10"/>
 
                         </StackPanel>
+                        
                     </ListViewItem>
+                    
                     <ListViewItem Height="70">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="QuestionMark" VerticalAlignment="Center" Width="25" Height="25" />

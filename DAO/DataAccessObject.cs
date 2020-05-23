@@ -65,11 +65,11 @@ namespace DAO
             }
         }
 
-        public ObservableCollection<string> PieceList()
+        public ObservableCollection<string> TacheList()
         {
             ObservableCollection<String> providerList = new ObservableCollection<String>();
 
-            String query = " SELECT * FROM piece_rechange";
+            String query = " SELECT * FROM tache";
             MySqlCommand command = new MySqlCommand(query, cnx);
 
             this.CheckConnection();
@@ -78,13 +78,39 @@ namespace DAO
 
             while (reader.Read())
             {
-                String providerName = reader["refference"].ToString();
+                String providerName = reader["designation"].ToString();
 
                 providerList.Add(providerName);
             }
             cnx.Close();
 
             return providerList;
+        }
+
+        public bool AddTache(Tache tache)
+        {
+            String query = "INSERT INTO tache (designation , prix, date_creation) VALUES (\"" + tache.Designation + "\" , \"" + tache.Prix + "\", \"" + tache.DateCreation.ToString("yyyy-MM-dd HH:mm:ss") + "\")";
+
+            MySqlCommand command = new MySqlCommand(query, cnx);
+
+            Console.WriteLine("==>Query: " + query);
+
+            try
+            {
+                this.CheckConnection();
+                command.ExecuteNonQuery();
+                cnx.Close();
+
+                this.Message = "Ajouté avec succès!";
+
+                return true;
+            }
+            catch (MySqlException e)
+            {
+                this.Message = e.Message;
+                return false;
+
+            }
         }
 
         public DataTable getFilteredFactureList(Facture filter)

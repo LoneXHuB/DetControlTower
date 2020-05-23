@@ -33,18 +33,21 @@ namespace WpfApp1
 
         public Facture Facture { get => facture; set => facture = value; }
         public ObservableCollection<Machine> Cart { get => cart; set => cart = value; }
-      
-
 
         public PrintPreview(Facture facture , ObservableCollection<Machine> listMachine)
         {
             this.Facture = facture;
+            //check if the email should be displayed or not
+            if (!facture.Client.Email.Contains("@"))
+                facture.Client.Email = "/";
             foreach(Machine machine in listMachine)
             {
-                MessageBox.Show("machine ref : " + machine.Refference);
+                if (machine.Refference.Contains("@"))
+                    machine.Refference = "";
 
                 if (!this.Cart.Any(cartMachine => cartMachine.Refference == machine.Refference))
                     this.Cart.Add(machine);
+
                 else
                 {
 
@@ -55,69 +58,52 @@ namespace WpfApp1
                             cartMachine.Quantity++;
                             break;
                         }
-
                     }
-
                 }
             }
             
             InitializeComponent();
         }
 
-
-
-
-
-
-
         private void PrintPage()
         {
-    
-
-
-                PrintDialog printer = new PrintDialog();
-                if (printer.ShowDialog().GetValueOrDefault(false))
-                {
-                      Grid printedGrid = printableGrid;
-                    //get selected printer capabilities
-                    System.Printing.PrintCapabilities capabilities = printer.PrintQueue.GetPrintCapabilities(printer.PrintTicket);
+            PrintDialog printer = new PrintDialog();
+            if (printer.ShowDialog().GetValueOrDefault(false))
+            {
+                    Grid printedGrid = printableGrid;
+                //get selected printer capabilities
+                System.Printing.PrintCapabilities capabilities = printer.PrintQueue.GetPrintCapabilities(printer.PrintTicket);
                    
-                    //get scale of the print wrt to screen of WPF visual
-                    double scale = Math.Min(capabilities.PageImageableArea.ExtentWidth / printedGrid.ActualWidth, 
-                        capabilities.PageImageableArea.ExtentHeight / printedGrid.ActualHeight);
+                //get scale of the print wrt to screen of WPF visual
+                double scale = Math.Min(capabilities.PageImageableArea.ExtentWidth / printedGrid.ActualWidth, 
+                    capabilities.PageImageableArea.ExtentHeight / printedGrid.ActualHeight);
 
-                    //Transform the Visual to scale
-                    printedGrid.LayoutTransform = new ScaleTransform(scale, scale);
+                //Transform the Visual to scale
+                printedGrid.LayoutTransform = new ScaleTransform(scale, scale);
 
-                    //get the size of the printer page
-                    Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
+                //get the size of the printer page
+                Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
 
-                    //update the layout of the visual to the printer page size.
-                    printedGrid.Measure(sz);
+                //update the layout of the visual to the printer page size.
+                printedGrid.Measure(sz);
 
                     
-                    printedGrid.Arrange(new Rect(new Point(capabilities.PageImageableArea.OriginWidth, capabilities.PageImageableArea.OriginHeight), sz));
+                printedGrid.Arrange(new Rect(new Point(capabilities.PageImageableArea.OriginWidth, capabilities.PageImageableArea.OriginHeight), sz));
 
 
-                    //now print the visual to printer to fit on the one page.
-                    printer.PrintVisual(printedGrid, this.Title);
+                //now print the visual to printer to fit on the one page.
+                printer.PrintVisual(printedGrid, this.Title);
 
                  
-                }
-                else
-                    MessageBox.Show("Attention ! \n La facture n'a pas été imprimé !");
-
-              
-        
-          
+            }
+            else
+                MessageBox.Show("Attention ! \n La facture n'a pas été imprimé !");
         }
 
         private Boolean SaveFactureShot(Boolean menuClear )
         {
-
             try
             {
-
                 RenderTargetBitmap renderTarget = new RenderTargetBitmap(1860, 2630 
                                                                 , 300, 300, System.Windows.Media.PixelFormats.Pbgra32);
                 renderTarget.Render(printableGrid);
@@ -142,15 +128,10 @@ namespace WpfApp1
                 MessageBox.Show("Erreur de sauvegarde \n Error : " + e.Message);
                 return false;
                     }
-                
-
-            
-
         }
 
         private Boolean SendFactureEmail(Boolean start)
         {
-          
             try
             {
                 MailMessage mail = new MailMessage();
@@ -205,9 +186,7 @@ namespace WpfApp1
                     {
                     LoadingCover.Visibility = Visibility.Collapsed;
                     });
-
             }
-          
         }
   
         private void PrintButton_Click(object sender, RoutedEventArgs e)
@@ -235,7 +214,6 @@ namespace WpfApp1
             signature.Visibility = Visibility.Collapsed;
             });
             return true;
-
         }
 
         private async void EmailButton_Click(object sender, RoutedEventArgs e)
@@ -286,8 +264,7 @@ namespace WpfApp1
 
             amountInLetters.Text = totalTTC.ToLettres();
 
-
-
+            
             cartDataGrid.ItemsSource = this.Cart;
         }
 

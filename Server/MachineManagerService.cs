@@ -76,7 +76,7 @@ namespace Server
 
         public ObservableCollection<string> PieceList()
         {
-            return dao.PieceList();
+            return dao.TacheList();
         }
 
         public bool AddPiece(Piece piece)
@@ -85,6 +85,19 @@ namespace Server
             this.Message = dao.Message;
 
             return added;
+        }
+
+        public bool AddTache(Tache tache)
+        {
+            Boolean added = dao.AddTache(tache);
+            this.Message = dao.Message;
+
+            return added;
+        }
+
+        public ObservableCollection<string> TacheList()
+        {
+            return dao.TacheList();
         }
     }
 }

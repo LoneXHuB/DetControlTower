@@ -68,7 +68,6 @@ namespace WpfApp1
 
         private void GererOuvrage_Select(object sender, SelectionChangedEventArgs e)
         {
-
             if (((ListBoxItem)((ListBox)sender).SelectedItem) != null)
             {
 
@@ -82,23 +81,24 @@ namespace WpfApp1
 
                         break;
 
-                    case "Ajouter pièce rech.":
-
-                        MainFrame.Content = new AjouterPiece();
-
-                        break;
-
-                    case "Liste pièce rech.":
-
-                        MainFrame.Content = new StockPiece();
-
-                        break;
-
                     case "Ajouter Machine":
 
                         MainFrame.Content = new AjouterMachine();
 
                         break;
+
+                    case "Créer tache":
+
+                        MainFrame.Content = new AjouterIntervention();
+
+                        break;
+
+                    case "Facturer intervention":
+
+                        throw new NotImplementedException();
+
+                        break;
+
                     case "Facture":
 
                         MainFrame.Content = new FactureFinal();
@@ -130,7 +130,5 @@ namespace WpfApp1
         { 
             MainFrame.Content = new Proforma();
         }
-
-        
     }
 }

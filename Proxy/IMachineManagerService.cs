@@ -21,5 +21,7 @@ namespace Proxy
         bool AddPiece(Piece piece);
         DataTable GetPieceList(Piece filter);
         bool RemovePiece(Piece piece);
+        ObservableCollection<string> TacheList();
+        bool AddTache(Tache tache);
     }
 }
