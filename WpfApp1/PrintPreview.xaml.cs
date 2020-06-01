@@ -28,40 +28,72 @@ namespace WpfApp1
     public partial class PrintPreview : Window
     {
         private Facture facture;
-        private ObservableCollection<Machine> cart = new ObservableCollection<Machine>();
+        private ObservableCollection<Facturable> cart = new ObservableCollection<Facturable>();
       
 
         public Facture Facture { get => facture; set => facture = value; }
-        public ObservableCollection<Machine> Cart { get => cart; set => cart = value; }
+        public ObservableCollection<Facturable> Cart { get => cart; set => cart = value; }
 
-        public PrintPreview(Facture facture , ObservableCollection<Machine> listMachine)
+        public PrintPreview(Facture facture, ObservableCollection<Tache> ListFacturable)
         {
             this.Facture = facture;
-            //check if the email should be displayed or not
-            if (!facture.Client.Email.Contains("@"))
-                facture.Client.Email = "/";
-            foreach(Machine machine in listMachine)
+           
+            foreach (Tache facturable in ListFacturable)
             {
-                if (machine.Refference.Contains("@"))
-                    machine.Refference = "";
-
-                if (!this.Cart.Any(cartMachine => cartMachine.Refference == machine.Refference))
-                    this.Cart.Add(machine);
+                if (!this.Cart.Any(cartFacturable => cartFacturable.Designation == facturable.Designation))
+                    this.Cart.Add(facturable);
 
                 else
                 {
-
-                    foreach (Machine cartMachine in this.Cart)
+                    foreach (Tache cartFacturable in this.Cart)
                     {
-                        if (cartMachine.Refference.Equals(machine.Refference))
+                        if (cartFacturable.Designation.Equals(facturable.Designation))
                         {
-                            cartMachine.Quantity++;
+                            cartFacturable.Quantity++;
                             break;
                         }
                     }
                 }
             }
-            
+
+            InitializeComponent();
+        }
+
+        public PrintPreview(Facture facture, ObservableCollection<Machine> ListFacturable)
+        {
+            this.Facture = facture;
+            //check if the email should be displayed or not
+            if (!facture.Client.Email.Contains("@"))
+                facture.Client.Email = "/";
+            foreach (Machine facturable in ListFacturable)
+            {
+                if (facturable.Refference != null)
+                {
+                    if (facturable.Refference.Contains("@"))
+                        facturable.Refference = "";
+                }
+                ObservableCollection<Machine> castCart = new ObservableCollection<Machine>();
+
+                if (!castCart.Any(cartFacturable => cartFacturable.Refference == facturable.Refference))
+                {
+                    Cart.Add(facturable);
+                    castCart.Add(facturable);
+                }
+
+                else
+                {
+
+                    foreach (Machine cartFacturable in Cart)
+                    {
+                        if (cartFacturable.Refference.Equals(facturable.Refference))
+                        {
+                            cartFacturable.Quantity++;
+                            break;
+                        }
+                    }
+                }
+            }
+
             InitializeComponent();
         }
 
@@ -238,8 +270,8 @@ namespace WpfApp1
         {
             double totalCart = 0.0;
 
-            foreach (Machine machine in Cart)
-                totalCart += machine.Pdv*machine.Quantity;
+            foreach (Facturable facturable in Cart)
+                totalCart += facturable.Pdv*facturable.Quantity;
 
             totalHt.Text = totalCart.ToString();
             clientAddress.Text = facture.Client.Address;

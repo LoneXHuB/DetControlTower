@@ -185,9 +185,17 @@ namespace WpfApp1
             {
                 Facture facture = this.FillFactureFromRow(row);
 
+                PrintPreview printWindow;
+
                 ObservableCollection<Machine> machineCollection = service.GetFactureMachineList(facture);
-                
-                PrintPreview printWindow = new PrintPreview(facture , machineCollection );
+                if(machineCollection.Count == 0)
+                {
+                    ObservableCollection<Tache> tacheCollection = service.GetFactureTacheList(facture);
+                    printWindow = new PrintPreview(facture, tacheCollection);
+                }
+                else
+                    printWindow = new PrintPreview(facture , machineCollection );
+
                 printWindow.Show();
 
 

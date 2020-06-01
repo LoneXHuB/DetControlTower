@@ -87,9 +87,27 @@ namespace DAO
             return providerList;
         }
 
+        public DataTable GetTacheList(Tache filter)
+        {
+            String query = "SELECT * FROM tache";
+
+            Console.WriteLine("==>Query: " + query);
+
+            MySqlCommand command = new MySqlCommand(query, cnx);
+
+            DataTable dataTable = new DataTable();
+            this.CheckConnection();
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+
+
+            dataAdapter.Fill(dataTable);
+            cnx.Close();
+            return dataTable;
+        }
+
         public bool AddTache(Tache tache)
         {
-            String query = "INSERT INTO tache (designation , prix, date_creation) VALUES (\"" + tache.Designation + "\" , \"" + tache.Prix + "\", \"" + tache.DateCreation.ToString("yyyy-MM-dd HH:mm:ss") + "\")";
+            String query = "INSERT INTO tache (designation , prix, date_creation) VALUES (\"" + tache.Designation + "\" , \"" + tache.Pdv + "\", \"" + tache.CreationDate.ToString("yyyy-MM-dd HH:mm:ss") + "\")";
 
             MySqlCommand command = new MySqlCommand(query, cnx);
 
@@ -184,7 +202,6 @@ namespace DAO
                 return false;
 
             }
-
         }
 
         public ObservableCollection<String> ProviderList()
@@ -230,6 +247,7 @@ namespace DAO
                                           "AND (num_arrivage LIKE \"%{3}%\" OR num_arrivage IS NULL) )", filter.Refference
                                      , filter.Categ, filter.NameF, filter.ArrivalNumber);
             }
+
             Console.WriteLine("==>Query: " + query);
 
             MySqlCommand command = new MySqlCommand(query, cnx);
@@ -305,6 +323,38 @@ namespace DAO
             return machineCollection;
         }
 
+        public ObservableCollection<Tache> GetFactureTacheList(Facture filter)
+        {
+            String query = String.Format("SELECT * FROM tache_facture AS p LEFT JOIN tache ON id=id_tache WHERE p.id_facture=\"{0}\" AND p.type_facture=\"{1}\" ORDER BY designation", filter.IdFacture, filter.Type);
+
+            MySqlCommand command = new MySqlCommand(query, cnx);
+
+            Console.WriteLine("==>Query: " + query);
+
+            this.CheckConnection();
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            ObservableCollection<Tache> machineCollection = new ObservableCollection<Tache>();
+
+            while (reader.Read())
+            {
+                Tache tache = new Tache();
+
+                tache.Id = Int32.Parse(reader["id_tache"].ToString());
+                tache.Designation = reader["designation"].ToString();
+                tache.Pdv = Double.Parse(reader["pdv"].ToString());
+
+                Console.WriteLine("machine Added Id = " + tache.Id);
+
+                machineCollection.Add(tache);
+            }
+
+            cnx.Close();
+            cnx.Close();
+            return machineCollection;
+        }
+
         public Boolean EditMachine(Machine machine)
         {
             try
@@ -315,7 +365,6 @@ namespace DAO
                                                                  ", remarque =\"{4}\" "+
                                                                 "WHERE (id=\"{0}\")"
                                                                 , machine.Id , machine.Refference, machine.Categ, machine.Designation , machine.Remarque);
-
                 Console.WriteLine("==>Query: " + query1);
 
 
@@ -337,7 +386,7 @@ namespace DAO
             }
         }
 
-        public Boolean RemoveMachine (Machine machine)
+        public Boolean RemoveMachine (Facturable machine)
         {
             try
             {
@@ -551,7 +600,31 @@ namespace DAO
             }
         }
 
+        public bool FacturerTache(Tache tache)
+        {
+            try
+            {
+                String query = String.Format("INSERT INTO tache_facture (id_facture , type_facture , id_tache )" +
+                    " VALUES ( \"{0}\" , \"{1}\" , \"{2}\" )", tache.IdFacture, tache.TypeFacture, tache.Id);
+                
+                MySqlCommand command1 = new MySqlCommand(query, cnx);
 
+                // cnx.Close();
+                // cnx.Open();
+                this.CheckConnection();
+                command1.ExecuteNonQuery();
+                cnx.Close();
+                Console.WriteLine("==>Query: " + query);
+
+                this.Message = "Machine Modifié : " + tache.Id;
+                return true;
+            }
+            catch (MySqlException e)
+            {
+                this.Message = e.Message;
+                return false;
+            }
+        }
 
 
         public bool Savefacture(Facture facture)
@@ -559,7 +632,7 @@ namespace DAO
             Console.WriteLine("facture saved id: " + facture.IdFacture);
 
 
-            String query = String.Format("INSERT INTO facture  (id_facture , date_fact , pay_method , payed , state , trial , type ,"+
+            String query = String.Format("INSERT INTO facture (id_facture , date_fact , pay_method , payed , state , trial , type ,"+
                 " client_email , remise , waranty , timbre ) values (\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\")", facture.IdFacture,
                 facture.DateFacture.ToString("yyyy-MM-dd hh:mm") , facture.PayMethod , facture.Payed , facture.State , 0
                 , facture.Type  , facture.Client.Email,facture.Remise , facture.Waranty , facture.Timbre);

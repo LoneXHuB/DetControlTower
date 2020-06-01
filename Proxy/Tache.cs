@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 namespace Proxy
 {
     [Serializable]
-    public class Tache
+    public class Tache : Facturable
     {
-        private int id;
-        private string designation;
-        private double prix;
-        DateTime dateCreation = DateTime.Now;
+        private DateTime creationDate = DateTime.Now;
 
-        public DateTime DateCreation { set; get; }
-        public int Id { get; set; }
-        public string Designation { get; set; }
-        public double Prix { get; set; }
+        public DateTime CreationDate { set; get; }
 
-        public Tache(string designation, double prix)
+        public Tache() { base.Quantity = 1; }
+
+        public Tache(string designation)
         {
             Designation = designation;
-            Prix = prix;
         }
 
-        public Tache(int id, string designation, double prix) : this(designation , prix)
+        public Tache(string designation, double prix) : base(designation)
+        {
+            Pdv = prix;
+        }
+
+        public Tache(int id, string designation, double prix) : base(designation , prix)
         {
             Id = id;
         }

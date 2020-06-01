@@ -16,5 +16,6 @@ namespace Proxy
         DataTable getFilteredFactureList(Facture facture);
         bool EditFacture(Facture facture);
         ObservableCollection<Machine> GetFactureMachineList(Facture facture);
+        ObservableCollection<Tache> GetFactureTacheList(Facture facture);
     }
 }

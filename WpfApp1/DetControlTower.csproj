@@ -105,6 +105,9 @@
     <Compile Include="BiblioWindow.xaml.cs">
       <DependentUpon>BiblioWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FacturerIntervention.xaml.cs">
+      <DependentUpon>FacturerIntervention.xaml</DependentUpon>
+    </Compile>
     <Compile Include="idPiece.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -154,6 +157,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="FacturerIntervention.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

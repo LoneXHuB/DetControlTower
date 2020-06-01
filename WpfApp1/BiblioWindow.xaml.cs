@@ -95,7 +95,7 @@ namespace WpfApp1
 
                     case "Facturer intervention":
 
-                        throw new NotImplementedException();
+                        MainFrame.Content = new FacturerIntervention();
 
                         break;
 

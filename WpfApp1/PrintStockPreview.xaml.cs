@@ -30,15 +30,15 @@ namespace WpfApp1
     {
         
         private Facture facture;
-        private ObservableCollection<Machine> stock ;
+        private ObservableCollection<Facturable> stock ;
       
 
         public Facture Facture { get => facture; set => facture = value; }
-        public ObservableCollection<Machine> Stock { get => stock; set => stock = value; }
+        public ObservableCollection<Facturable> Stock { get => stock; set => stock = value; }
       
 
 
-        public PrintStockPreview(ObservableCollection<Machine> stock )
+        public PrintStockPreview(ObservableCollection<Facturable> stock )
         {
             date.Text = DateTime.Now.ToLongDateString();
             user.Text = MyGeneralConstants.Host;
@@ -47,15 +47,8 @@ namespace WpfApp1
             InitializeComponent();
         }
 
-
-
-
-
-
-
         private async void PrintPage()
         {
-
             PrintDialog printer = new PrintDialog();
             if (printer.ShowDialog().GetValueOrDefault(false))
             {
@@ -104,7 +97,7 @@ namespace WpfApp1
             
             printerControls.Visibility = Visibility.Collapsed;
 
-            foreach(ObservableCollection<Machine> page in this.GetSplitPages(Stock))
+            foreach(ObservableCollection<Facturable> page in this.GetSplitPages(Stock))
             {
                 PrintStockPreview printablePage = new PrintStockPreview(page);
                 printablePage.PrintPage();
@@ -146,12 +139,12 @@ namespace WpfApp1
         }
 
 
-        private IEnumerable<ObservableCollection<Machine>> GetSplitPages(ObservableCollection<Machine> stockCollection)
+        private IEnumerable<ObservableCollection<Facturable>> GetSplitPages(ObservableCollection<Facturable> stockCollection)
         {
-            IEnumerable<Machine> page = new List<Machine>();
+            IEnumerable<Facturable> page = new List<Facturable>();
             int count = 0;
             int index = 0;
-            foreach (Machine machine in stockCollection)
+            foreach (Facturable machine in stockCollection)
             {
              
                 page.Append(machine);
@@ -162,7 +155,7 @@ namespace WpfApp1
                 if(count >= 760)
                 {
                     count = 0;
-                    yield return (ObservableCollection<Machine>)page;
+                    yield return (ObservableCollection<Facturable>)page;
                 }
                 index++;
             }

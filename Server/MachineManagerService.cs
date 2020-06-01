@@ -66,6 +66,14 @@ namespace Server
             return removed;
         }
 
+        public bool FacturerTache(Tache tache)
+        {
+            Boolean edited = dao.FacturerTache(tache);
+            this.Message = dao.Message;
+
+            return edited;
+        }
+
         public bool UpdateMachine(Machine machine)
         {
             Boolean edited = dao.UpdateMachine(machine);
@@ -98,6 +106,11 @@ namespace Server
         public ObservableCollection<string> TacheList()
         {
             return dao.TacheList();
+        }
+
+        public DataTable GetTacheList(Tache filter)
+        {
+            return dao.GetTacheList(filter);
         }
     }
 }

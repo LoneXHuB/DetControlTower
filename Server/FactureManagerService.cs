@@ -54,9 +54,12 @@ namespace Server
 
         public ObservableCollection<Machine> GetFactureMachineList(Facture facture)
         {
-
             return dao.GetFactureMachineList(facture);
+        }
 
+        public ObservableCollection<Tache> GetFactureTacheList(Facture facture)
+        {
+            return dao.GetFactureTacheList(facture);
         }
     }
 }

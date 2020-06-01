@@ -140,7 +140,7 @@
                 </ListView>
 
 
-                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" Width="202" >
+                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" Width="187" >
                     <ListViewItem Width="200">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Adrèsse : "  HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>

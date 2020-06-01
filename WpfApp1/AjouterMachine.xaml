@@ -36,7 +36,7 @@
                 </Grid.RowDefinitions>
                     
                     <Label Grid.Row="0" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Ref" FontSize="16" />
-                    <TextBox x:Name="refInput" Grid.Row="0" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" TextChanged="TitreInput_TextChanged" />
+                <TextBox x:Name="refInput" Grid.Row="0" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250" TextWrapping="Wrap" CharacterCasing="Upper" Background="White" Foreground="#FF343333" HorizontalAlignment="Right" TextChanged="TitreInput_TextChanged" behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding RefList}"/>
 
                     <Label Grid.Row="1" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Designation" FontSize="16" />
                     <TextBox x:Name="desInput" Grid.Row="1" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
@@ -56,7 +56,7 @@
 
                 <Label Grid.Row="5" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Fournisseur" FontSize="16" />
 
-                <TextBox  x:Name="providerInput" Grid.Row="5" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right"
+                <TextBox  x:Name="providerInput" Grid.Row="5" BorderThickness="1" Margin="0,0,50,0" Height="30" Width="250" CharacterCasing="Upper" Background="White" Foreground="#FF343333" HorizontalAlignment="Right"
 		                    behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding ProviderList}" />
 
 

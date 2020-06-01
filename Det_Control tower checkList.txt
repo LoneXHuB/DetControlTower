@@ -9,22 +9,24 @@
 -confirmation popups ----------------------check
 -ajout remarque dans table machine---------check
 -Quantité a l'ajout -----------------------check
--fix the select query / in client rapport--check 
--piece de rechange (new table)-------------
+-fix the select query / in client rapport--check
+-add error Log-----------------------------
+-add if no "@" in email input put /--------check
+-if can't save client => can't save Bill---check
+-verify delete machine coherence with bill-check
+-intervention(prix,qte,designation)--------check
+-@to look for piece rechange --------------check
+-ref doesn't display when starts with @----check
+-ask brahim if cheque can be unmentioned in 
+facture final------------------------------check
 -facture avoir customisé-------------------
 -pv d'essai--------------------------------
 -pv de recu--------------------------------
 -bon de livraison -------------------------
 -imprimer le stock-------------------------
 -cloude storage----------------------------
--add error Log-----------------------------
--add if no "@" in email input put /--------
--if can't save client => can't save Bill---
--verify delete machine coherence with bill-
--intervention(prix,qte,designation)--------
--@to look for piece rechange --------------
--ref doesn't display when starts with @----
--piece de rechange(prix, ref designation)--
--add piece de rechange buttons-------------
-
+-client info display's gotta be fixed dog--
+-capitalize machine ref and provider in DB-
+-if machine en stock no need to fill form--
+-fix quantity bug in intervention cart ----
 28469Hash50Inj2ct

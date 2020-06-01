@@ -150,7 +150,7 @@ namespace WpfApp1
 
             DataTable dataTable = service.GetMachineList(new Machine(), true);
 
-            ObservableCollection<Machine> stockCollection = new ObservableCollection<Machine>();
+            ObservableCollection<Facturable> stockCollection = new ObservableCollection<Facturable>();
 
             foreach (DataRow row in dataTable.Rows)
             {

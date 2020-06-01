@@ -128,12 +128,10 @@ namespace WpfApp1
             oldClientButton.Visibility = Visibility.Collapsed;
 
             this.newClient = false;
-
         }
 
         private void ProformaButton_Click(object sender, RoutedEventArgs e)
         {
-
             MessageBoxResult dialogResult = MessageBox.Show("Etes vous sur de vouloir enregistrer cette facture ?","Attention !", MessageBoxButton.YesNo);
 
             if (dialogResult == MessageBoxResult.Yes)
@@ -183,8 +181,6 @@ namespace WpfApp1
 
                     }
 
-
-
                     if (!Double.TryParse(payedInput.Text, out Double payed))
                         MessageBox.Show("Attention ! \n Veuillez entrer un motant payé valide !");
                     else
@@ -193,10 +189,7 @@ namespace WpfApp1
 
                         this.proforma = new Facture(DateTime.Now, payMeth, payed, "Proforma", false, "Facture Proforma", null, client);
 
-
-
                         String garantie = ((ComboBoxItem)garantieInput.SelectedItem).Content.ToString();
-
 
                         if (Double.TryParse(remiseInput.Text, out Double remise)
                                  && Double.TryParse(timbreInput.Text, out Double timbre))
@@ -223,16 +216,13 @@ namespace WpfApp1
                             }
                             else
                                 MessageBox.Show("Attention ! \n Erreur d'enregistrement facture ! \n Message : \n " + factureService.getMessage());
-
                         }
                         else
                             MessageBox.Show("Veuillez verifier la remise et les droits de timbre entrés");
                     }
-
                 }
             }
         }
-       
 
          public void ViderButton_Click (Object sender , RoutedEventArgs eventArgs)
          {
@@ -251,8 +241,6 @@ namespace WpfApp1
         {
             FillDataGrid();
         }
-
-      
 
         private void GarantieChanged(object sender, SelectionChangedEventArgs e)
         {
