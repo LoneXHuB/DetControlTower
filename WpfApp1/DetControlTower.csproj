@@ -61,6 +61,9 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -125,6 +128,9 @@
     <Compile Include="ClientHistory.xaml.cs">
       <DependentUpon>ClientHistory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuantityDialog.xaml.cs">
+      <DependentUpon>QuantityDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StockManager.xaml.cs">
       <DependentUpon>StockManager.xaml</DependentUpon>
     </Compile>
@@ -180,6 +186,10 @@
     <Page Include="ClientHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="QuantityDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StockManager.xaml">
       <SubType>Designer</SubType>

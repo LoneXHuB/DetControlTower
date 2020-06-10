@@ -39,8 +39,7 @@ namespace Server
                 Console.WriteLine("RegisteredTypes : ");
                 foreach ( WellKnownServiceTypeEntry obj in RemotingConfiguration.GetRegisteredWellKnownServiceTypes())
                     {
-                    Console.WriteLine("Object : "+obj.ObjectType);
-              
+                        Console.WriteLine("Object : "+obj.ObjectType);
                     }
                 Console.WriteLine("---------------------------");
                 Console.WriteLine("");

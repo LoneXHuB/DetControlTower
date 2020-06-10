@@ -25,5 +25,7 @@ namespace Proxy
         DataTable GetTacheList(Tache filter);
         bool UpdateMachine(Machine machine);
         bool FacturerTache(Tache tache);
+        ObservableCollection<string> RefList();
+        Machine GetMachineByRef(String refference);
     }
 }

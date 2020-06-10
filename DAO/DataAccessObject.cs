@@ -47,7 +47,6 @@ namespace DAO
 
                 Console.WriteLine("==>Query: " + query1);
 
-
                 MySqlCommand command = new MySqlCommand(query1, cnx);
                 // cnx.Close();
                 // cnx.Open();
@@ -85,6 +84,60 @@ namespace DAO
             cnx.Close();
 
             return providerList;
+        }
+
+        public Machine GetMachineByRef(string refference)
+        {
+            Machine machine = new Machine();
+
+            String query = " SELECT * FROM Machine Where ref =\"" + refference + "\" ";
+            MySqlCommand command = new MySqlCommand(query, cnx);
+
+            this.CheckConnection();
+            MySqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                machine.Id = reader["id"].ToString();
+                machine.Refference = reader["ref"].ToString();
+                machine.Designation = reader["designation"].ToString();
+                machine.ArrivalNumber = reader["num_arrivage"].ToString();
+                machine.Serial = reader["serial"].ToString();
+                machine.Categ = reader["categ"].ToString();
+                machine.NameF = reader["namef"].ToString();
+                machine.Pdr = Double.Parse(reader["pdr"].ToString());
+                machine.Pdv = Double.Parse(reader["pdv"].ToString());
+                machine.ArrivalDate = DateTime.Parse(reader["arrival"].ToString());
+            }
+
+            Console.WriteLine("==>Query: " + query);
+
+
+            cnx.Close();
+
+            return machine;
+        }
+
+        public ObservableCollection<String> getRefList()
+        {
+            ObservableCollection<String> refList = new ObservableCollection<String>();
+
+            String query = " SELECT ref FROM machine";
+            MySqlCommand command = new MySqlCommand(query, cnx);
+
+            this.CheckConnection();
+            MySqlDataReader reader = command.ExecuteReader();
+            Console.WriteLine("==>Query: " + query);
+
+            while (reader.Read())
+            {
+                String providerName = reader["ref"].ToString();
+
+                refList.Add(providerName);
+            }
+            cnx.Close();
+
+            return refList;
         }
 
         public DataTable GetTacheList(Tache filter)

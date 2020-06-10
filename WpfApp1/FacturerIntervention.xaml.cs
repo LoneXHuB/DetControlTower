@@ -16,7 +16,9 @@ using Proxy;
 using System.Data;
 using System.Collections.ObjectModel;
 using System.Collections;
+using Microsoft.VisualBasic; 
 using WpfApp1;
+using System.Threading;
 
 namespace DetControlTower
 {
@@ -69,6 +71,28 @@ namespace DetControlTower
         {
             IList selectedRows = MachinesDataGrid.SelectedItems;
 
+            if (selectedRows.Count > 1)
+                AddToCart(selectedRows);
+            else
+            {
+                QuantityDialog dialog = new QuantityDialog();
+                dialog.Show();
+                dialog.AddClicked += OnAddClicked;
+            }
+        }
+
+        private void OnAddClicked(object sender, Int32 Qte)
+        {
+            IList selectedRows = MachinesDataGrid.SelectedItems;
+
+            for (int i = 0; i < Qte ; i++)
+                AddToCart(selectedRows);
+
+            MessageBox.Show(Qte + " Tache(s) ajoutées");
+        }
+
+        private void AddToCart(IList selectedRows)
+        {
             foreach (DataRowView row in selectedRows)
             {
                 Tache tache = new Tache();
@@ -78,23 +102,27 @@ namespace DetControlTower
                 tache.Designation = row["designation"].ToString();
 
                 tacheList.Add(tache);
-                //Counting tache redondancy
-                if (!cart.Any(catTache => catTache.Designation == tache.Designation))
-                    cart.Add(tache);
-                else
+
+                bool newTache = false;
+
+                foreach (Tache t in cart)
                 {
-                    foreach (Tache cartTache in cart)
+                    newTache = (t.Designation != tache.Designation);
+
+                    if(!newTache)
                     {
-                        if (cartTache.Designation.Equals(tache.Designation))
-                        {
-                            cartTache.Quantity++;
-                            break;
-                        }
+                        t.Quantity++;
+                        break;
                     }
                 }
+
+                if (cart.Count == 0 || newTache)
+                    cart.Add(tache);
             }
+
             MessageBox.Show("Taches ajoutées au panier ! ");
             CartDataGrid.ItemsSource = cart;
+            CartDataGrid.Items.Refresh();
         }
 
         private void NewClientButton_Click(object sender, RoutedEventArgs e)

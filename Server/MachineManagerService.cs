@@ -87,6 +87,16 @@ namespace Server
             return dao.TacheList();
         }
 
+        public Machine GetMachineByRef(String refference)
+        {
+            return dao.GetMachineByRef(refference);
+        }
+
+        public ObservableCollection<string> RefList()
+        {
+            return dao.getRefList();
+        }
+
         public bool AddPiece(Piece piece)
         {
             Boolean added = dao.AddPiece(piece);

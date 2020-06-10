@@ -45,8 +45,7 @@ namespace DetControlTower
         private async void AjouterButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if (designationInput.Text == "" || prixInput.Text == ""
-                 || QteInput.Text == "")
+            if (designationInput.Text == "" || prixInput.Text == "")
             {
                 this.ShowErrorMessage("Veuillez remplir Tout les champs !");
                 return;
@@ -54,15 +53,6 @@ namespace DetControlTower
 
             else
             {
-                int qte = 1;
-                bool correctQteInput = Int32.TryParse(QteInput.Text, out qte);
-
-                if (!correctQteInput)
-                {
-                    this.ShowErrorMessage("Le champ Quantité doit etre un chiffre entier");
-                    return;
-                }
-
                 double prixTache;
 
                 if(!Double.TryParse(prixInput.Text , out prixTache))
@@ -73,30 +63,26 @@ namespace DetControlTower
 
                 Tache tache = new Tache(designationInput.Text, prixTache);
 
-                for (int i = 0; i < qte; i++)
+                if (tache.Designation.Equals(lastTacheDesignation))
+                    AddCount++;
+                else
                 {
-                    if (tache.Designation.Equals(lastTacheDesignation))
-                        AddCount++;
-                    else
-                    {
-                        lastTacheDesignation = tache.Designation;
-                        AddCount = 1;
-                    }
+                    lastTacheDesignation = tache.Designation;
+                    AddCount = 1;
+                }
 
-                    if (service.AddTache(tache))
-                    {
-                        this.TacheList = service.TacheList();
-                        await Task.Run(() => {
-                            Dispatcher.Invoke(() => { this.ShowSuccessMessage("Succès! \n(" + AddCount + ") Tache(s) : " + lastTacheDesignation + " Ajoutées"); });
-                        });
-                    }
+                if (service.AddTache(tache))
+                {
+                    this.TacheList = service.TacheList();
+                    await Task.Run(() => {
+                        Dispatcher.Invoke(() => { this.ShowSuccessMessage("Succès! \n(" + AddCount + ") Tache(s) : " + lastTacheDesignation + " Ajoutées"); });
+                    });
+                }
 
-                    else
-                    {
-                        AddCount = 1;
-                        this.ShowErrorMessage(service.getMessage());
-                    }
-
+                else
+                {
+                    AddCount = 1;
+                    this.ShowErrorMessage(service.getMessage());
                 }
             }
         }
@@ -105,7 +91,6 @@ namespace DetControlTower
         {
             designationInput.Text = "";
             prixInput.Text = "";
-            QteInput.Text = "";
         }
 
         private void ShowErrorMessage(String message)

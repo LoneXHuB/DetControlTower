@@ -10,15 +10,15 @@
 -ajout remarque dans table machine---------check
 -Quantité a l'ajout -----------------------check
 -fix the select query / in client rapport--check
--add error Log-----------------------------
 -add if no "@" in email input put /--------check
 -if can't save client => can't save Bill---check
 -verify delete machine coherence with bill-check
 -intervention(prix,qte,designation)--------check
 -@to look for piece rechange --------------check
 -ref doesn't display when starts with @----check
--ask brahim if cheque can be unmentioned in 
-facture final------------------------------check
+-fix quantity bug in intervention cart ----check
+-add error Log-----------------------------
+-add error Log-----------------------------
 -facture avoir customisé-------------------
 -pv d'essai--------------------------------
 -pv de recu--------------------------------
@@ -28,5 +28,5 @@ facture final------------------------------check
 -client info display's gotta be fixed dog--
 -capitalize machine ref and provider in DB-
 -if machine en stock no need to fill form--
--fix quantity bug in intervention cart ----
+-supprimer machine not working-------------
 28469Hash50Inj2ct

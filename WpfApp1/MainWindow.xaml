@@ -11,7 +11,7 @@
     
         
     <Grid >
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" KeyDown="Keydown">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF113066" Offset="0"/>

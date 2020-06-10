@@ -40,6 +40,10 @@ namespace WpfApp1
 
         private void ConnectionButton_Click(Object sender, RoutedEventArgs e)
         {
+            ConnectToServer();
+        }
+        private void ConnectToServer()
+        {
             try
             {
                 IServiceAuthentification serviceAuth = (IServiceAuthentification)Activator
@@ -60,16 +64,22 @@ namespace WpfApp1
 
                 }
 
-            }catch(Exception exception)
+            }
+            catch (Exception exception)
             {
                 AuthentificationErrorFlag.Visibility = Visibility.Collapsed;
                 ExceptionErrorFlag.Visibility = Visibility.Visible;
             }
-
         }
        public void CloseButton_Click(Object sender , RoutedEventArgs args)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                ConnectToServer();
         }
     }
 }

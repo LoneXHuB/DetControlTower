@@ -13,7 +13,7 @@
 
     <Grid Background="White" >
 
-        <StackPanel Height="431" VerticalAlignment="Center" Margin="265,40,315,59"  >
+        <StackPanel Height="431" VerticalAlignment="Center" Margin="290,52,290,47"  >
 
 
             <TextBlock Text="Créer Tâche" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold" Foreground="#FF6E6C6C" Margin="0,10,0,0" />
@@ -38,17 +38,15 @@
                 <Label Grid.Row="3" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Content="Prix" FontSize="16" />
                 <TextBox x:Name="prixInput" Grid.Row="3" BorderThickness="1" Margin="0,4,50,4" Width="240" Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
                 
-                <Label HorizontalAlignment="Left" Margin="10 0 0 0" Grid.Row="5" VerticalAlignment="Center" Content="Quantité" FontSize="16" />
-                <TextBox x:Name="QteInput"  BorderThickness="1" Grid.Row="5" Margin="0,4,93,6" Height="30" Width="150"  TextAlignment="Center"  Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
-
-                <StackPanel  HorizontalAlignment="Center" Grid.Row="6" Orientation="Horizontal">
+               
+                <StackPanel  HorizontalAlignment="Center" Grid.Row="5" Orientation="Horizontal">
                     <materialDesign:PackIcon x:Name="WarningIcon" Visibility="Collapsed" Foreground="Yellow" Kind="Warning" Margin="10 13 15 0" VerticalAlignment="Top" Width="20" Height="25" />
                     <materialDesign:PackIcon x:Name="DoneIcon" Visibility="Collapsed" Foreground="Green" Kind="Done" Margin="10 13 15 0" VerticalAlignment="Top" Width="20" Height="25" />
                     <TextBlock x:Name="InputExceptionFlag"  Visibility="Collapsed" VerticalAlignment="Center"  HorizontalAlignment="Center" Text="user ou mot de passe incorrect" FontSize="9" Foreground="red"/>
                 </StackPanel>
 
-                <Button   x:Name="AjouterBtn" Grid.Row="7" HorizontalAlignment="Left" Margin="10 0" Foreground="WhiteSmoke" Content="Ajouter"  Background="#FF0CA80C" Height="30" Width="150"  BorderBrush="#FF4ADA3C" Click="AjouterButton_Click"/>
-                <Button   x:Name="ViderBtn" Grid.Row="7" HorizontalAlignment="Right" Margin="10 0" Foreground="WhiteSmoke" Content="Vider"  Background="#FF7C7C7C" Height="30" Width="150"  BorderBrush="#FF868787" Click="ViderButton_Click"/>
+                <Button   x:Name="AjouterBtn" Grid.Row="6" HorizontalAlignment="Left" Margin="10 0" Foreground="WhiteSmoke" Content="Ajouter"  Background="#FF0CA80C" Height="30" Width="150"  BorderBrush="#FF4ADA3C" Click="AjouterButton_Click"/>
+                <Button   x:Name="ViderBtn" Grid.Row="6" HorizontalAlignment="Right" Margin="10 0" Foreground="WhiteSmoke" Content="Vider"  Background="#FF7C7C7C" Height="30" Width="150"  BorderBrush="#FF868787" Click="ViderButton_Click"/>
 
 
             </Grid>
