@@ -369,8 +369,6 @@ namespace DAO
                 machineCollection.Add(machine);
             }
 
-
-
             cnx.Close();
             cnx.Close();
             return machineCollection;
@@ -378,7 +376,7 @@ namespace DAO
 
         public ObservableCollection<Tache> GetFactureTacheList(Facture filter)
         {
-            String query = String.Format("SELECT * FROM tache_facture AS p LEFT JOIN tache ON id=id_tache WHERE p.id_facture=\"{0}\" AND p.type_facture=\"{1}\" ORDER BY designation", filter.IdFacture, filter.Type);
+            String query = String.Format("SELECT * FROM tache_facture AS p LEFT JOIN tache ON tache.id=id_tache WHERE p.id_facture=\"{0}\" AND p.type_facture=\"{1}\" ORDER BY designation", filter.IdFacture, filter.Type);
 
             MySqlCommand command = new MySqlCommand(query, cnx);
 

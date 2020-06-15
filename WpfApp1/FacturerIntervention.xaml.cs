@@ -229,12 +229,13 @@ namespace DetControlTower
 
                         MessageBox.Show("Nouvelle facture enregistré !");
 
-                        PrintPreview printWindow = new PrintPreview(factureF , tacheList);
+                        PrintPreview printWindow = new PrintPreview(factureF , cart);
                         tacheList = new ObservableCollection<Tache>();
                         printWindow.Show();
 
                         FillDataGrid();
-                        CartDataGrid.ItemsSource = tacheList;
+                        cart.Clear();
+                        CartDataGrid.ItemsSource = cart;
                     }
                     else
                         MessageBox.Show("Attention ! \n Erreur d'enregistrement facture ! \n Message : \n " + factureService.getMessage());
@@ -292,6 +293,12 @@ namespace DetControlTower
                 cartArtLabel.Visibility = Visibility.Collapsed;
                 cartArtInput.Text = "";
             }
+        }
+
+        private void EmptyCart_Click(object sender, RoutedEventArgs e)
+        {
+            tacheList.Clear();
+            cart.Clear();
         }
     }
 }

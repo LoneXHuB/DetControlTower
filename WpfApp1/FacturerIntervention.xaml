@@ -29,6 +29,7 @@
             
             <StackPanel Orientation="Horizontal" Height="28" Background="#FFC5C5C5" >
                 <Label Content="Panier" FontSize="16" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center"/>
+                <Button Margin="455,0" Content="Vider Panier" Height="Auto" Width="108" Click="EmptyCart_Click"/>
             </StackPanel>
         
             <DataGrid x:Name="CartDataGrid" Height="189" AutoGenerateColumns="False">

@@ -34,6 +34,7 @@ namespace WpfApp1
                                                                                     "tcp://" + MyGeneralConstants.Host + ":2019/FactureManagerService");
 
         private ObservableCollection<Machine> cart = new ObservableCollection<Machine>();
+        private ObservableCollection<Machine> cartMachines = new ObservableCollection<Machine>();
         private ObservableCollection<String> clientList = new ObservableCollection<String>();
         private Facture proforma ;
 
@@ -75,7 +76,7 @@ namespace WpfApp1
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
             IList selectedRows = MachinesDataGrid.SelectedItems;
-            
+
             foreach (DataRowView row in selectedRows)
             {
                 Machine machine = new Machine();
@@ -85,13 +86,25 @@ namespace WpfApp1
                 machine.NameF = row["namef"].ToString();
                 machine.Designation = row["designation"].ToString();
 
-               
-                cart.Add(machine);
+                cartMachines.Add(machine);
+                //Counting machine quantity
+                if (!cart.Any(cartMachine => cartMachine.Refference == machine.Refference))
+                    cart.Add(machine);
+                else
+                {
+                    foreach (Machine cartMachine in cart)
+                    {
+                        if (cartMachine.Refference.Equals(machine.Refference))
+                        {
+                            cartMachine.Quantity++;
+                            break;
+                        }
 
-    
+                    }
+                }
             }
-                     MessageBox.Show("Machines ajouté au panier ! ");
-                    CartDataGrid.ItemsSource = cart;
+            MessageBox.Show("Machines ajouté au panier ! ");
+            CartDataGrid.ItemsSource = cart;
         }
 
         private void NewClientButton_Click(object sender, RoutedEventArgs e)
@@ -200,7 +213,7 @@ namespace WpfApp1
 
                             if (factureService.Save(proforma))
                             {
-                                foreach (Machine machine in cart)
+                                foreach (Machine machine in cartMachines)
                                 {
                                     machine.State = "Sous Proforma";
                                     machine.IdFacture = proforma.IdFacture;
@@ -212,7 +225,8 @@ namespace WpfApp1
 
                                 PrintPreview printWindow = new PrintPreview(proforma, cart);
                                 printWindow.Show();
-
+                                cart.Clear();
+                                cartMachines.Clear();
                             }
                             else
                                 MessageBox.Show("Attention ! \n Erreur d'enregistrement facture ! \n Message : \n " + factureService.getMessage());
@@ -276,10 +290,9 @@ namespace WpfApp1
             
         }
 
-
-
-
-
-
+        private void EmptyCart_Click(object sender, RoutedEventArgs e)
+        {
+            cart.Clear();
+        }
     }
 }

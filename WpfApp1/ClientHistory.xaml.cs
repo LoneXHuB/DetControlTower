@@ -188,6 +188,7 @@ namespace WpfApp1
                 PrintPreview printWindow;
 
                 ObservableCollection<Machine> machineCollection = service.GetFactureMachineList(facture);
+
                 if(machineCollection.Count == 0)
                 {
                     ObservableCollection<Tache> tacheCollection = service.GetFactureTacheList(facture);

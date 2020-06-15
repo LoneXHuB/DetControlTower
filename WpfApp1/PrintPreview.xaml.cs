@@ -32,6 +32,7 @@ namespace WpfApp1
       
 
         public Facture Facture { get => facture; set => facture = value; }
+        private ObservableCollection<Machine> castCart = new ObservableCollection<Machine>();
         public ObservableCollection<Facturable> Cart { get => cart; set => cart = value; }
 
         public PrintPreview(Facture facture, ObservableCollection<Tache> ListFacturable)
@@ -67,23 +68,21 @@ namespace WpfApp1
                 facture.Client.Email = "/";
             foreach (Machine facturable in ListFacturable)
             {
-                if (facturable.Refference != null)
+                /*if (facturable.Refference != null)
                 {
                     if (facturable.Refference.Contains("@"))
                         facturable.Refference = "";
                 }
-                ObservableCollection<Machine> castCart = new ObservableCollection<Machine>();
 
-                if (!castCart.Any(cartFacturable => cartFacturable.Refference == facturable.Refference))
+
+                if (!castCart.Any(cartFacturable => cartFacturable.Refference == facturable.Refference ))
                 {
                     Cart.Add(facturable);
                     castCart.Add(facturable);
                 }
-
                 else
                 {
-
-                    foreach (Machine cartFacturable in Cart)
+                    foreach (Machine cartFacturable in castCart)
                     {
                         if (cartFacturable.Refference.Equals(facturable.Refference))
                         {
@@ -91,6 +90,28 @@ namespace WpfApp1
                             break;
                         }
                     }
+                }*/
+               
+
+                bool newMachine = true;
+
+                foreach(Machine m in castCart)
+                {
+                    if(m.Refference == facturable.Refference || (facturable.Refference == "" && m.Designation == facturable.Designation) )
+                    {
+                        m.Quantity++;
+                        newMachine = false;
+                        break;
+                    }
+                }
+
+                if(newMachine)
+                {
+                    if (facturable.Refference.Contains("@"))
+                        facturable.Refference = "";
+
+                    castCart.Add(facturable);
+                    cart.Add(facturable);
                 }
             }
 

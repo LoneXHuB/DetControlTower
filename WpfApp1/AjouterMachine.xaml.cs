@@ -132,6 +132,7 @@ namespace WpfApp1
                 if (machine.Id == "" || machine.Id == null)
                 {
                     this.ShowErrorMessage("La machine " + refInput.Text + " n'est pas encore en stock. \n Veuillez remplir tout les champs.");
+                    IsNewCheckBox.IsChecked = true;
                     return;
                 }
                 int qte = 1;
@@ -195,9 +196,10 @@ namespace WpfApp1
 
         private void Ref_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool newMachine = !RefList.Any((refference => refference == refInput.Text));
+           bool newMachine = !RefList.Any((refference => refference.StartsWith(refInput.Text)));
             if(newMachine && refInput.Text != "")
                 IsNewCheckBox.IsChecked = true;
+
         }
     }
 }

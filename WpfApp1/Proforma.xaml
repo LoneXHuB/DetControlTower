@@ -33,10 +33,11 @@
 
         </DataGrid>
         <StackPanel Background="#FFFAFAFA" Margin="0,280,412,0">
-            <StackPanel Orientation="Horizontal" Height="42" Background="#FFC5C5C5" >
+            <StackPanel Orientation="Horizontal" Height="33" Background="#FFC5C5C5" >
                 <Label Content="Panier" FontSize="16" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center"/>
+                <Button Margin="455,0" Content="Vider Panier" Height="Auto" Width="108" Click="EmptyCart_Click"/>
             </StackPanel>
-            <DataGrid x:Name="CartDataGrid" Height="172" AutoGenerateColumns="False"  >
+            <DataGrid x:Name="CartDataGrid" Height="182" AutoGenerateColumns="False"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="120" Header="Référence" Binding="{Binding Refference}" IsReadOnly="True"/>
                     <DataGridTextColumn Width="335" Header="Désignation" Binding="{Binding Designation}" IsReadOnly="True"/>
