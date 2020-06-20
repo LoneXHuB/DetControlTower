@@ -21,7 +21,6 @@ namespace DetControlTower
     public partial class QuantityDialog : Window
     {
         private int qte;
-
         public int Qte { set; get; }
 
         public delegate void AddClickedEventHandler(object o, Int32 qte);
@@ -31,6 +30,7 @@ namespace DetControlTower
         {
             InitializeComponent();
         }
+
         protected virtual void OnAddClicked()
         {
             if(AddClicked != null)
@@ -39,6 +39,7 @@ namespace DetControlTower
             }
             this.Close();
         }
+
         private void Ajouter_Click(object sender , EventArgs e)
         {
             int quantity = 0;

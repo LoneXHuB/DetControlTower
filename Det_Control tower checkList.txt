@@ -17,17 +17,17 @@
 -@to look for piece rechange --------------check
 -ref doesn't display when starts with @----check
 -fix quantity bug in intervention cart ----check
--add error Log-----------------------------
--add error Log-----------------------------
+-if machine en stock no need to fill form--check
+-supprimer machine not working-------------check
+-add error Log-----------------------------check
 -facture avoir customisé-------------------
 -pv d'essai--------------------------------
 -pv de recu--------------------------------
 -bon de livraison -------------------------
 -imprimer le stock-------------------------
 -cloude storage----------------------------
--client info display's gotta be fixed dog--
 -capitalize machine ref and provider in DB-
--if machine en stock no need to fill form--
--supprimer machine not working-------------
 -intervention facture final button---------
+-client info display's gotta be fixed dog--
+
 28469Hash50Inj2ct

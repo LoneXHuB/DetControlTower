@@ -54,7 +54,7 @@ namespace WpfApp1
         {
             String reference = refInput.Text;
           
-            Machine filter = new Machine(null , reference);
+            Machine filter = new Machine(0 , reference);
 
             DataTable dataTable = service.GetMachineList(filter , true );
 
@@ -64,21 +64,18 @@ namespace WpfApp1
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-           
             DataContext = new Proforma();
             this.FillDataGrid();
-
         }
 
         private void AddToCart_Click(object sender, RoutedEventArgs e)
         {
-
             IList selectedRows = MachinesDataGrid.SelectedItems; 
             
             foreach (DataRowView row in selectedRows)
             {
                 Machine machine = new Machine();
-                machine.Id = row["id"].ToString();
+                machine.Id = Int32.Parse(row["id"].ToString());
                 machine.Refference = row["ref"].ToString();
                 machine.Pdv = Double.Parse(row["pdv"].ToString());
                 machine.NameF = row["namef"].ToString();
@@ -97,12 +94,12 @@ namespace WpfApp1
                             cartMachine.Quantity++;
                             break;
                         }
-
                     }
                 }
             }
-                     MessageBox.Show("Machines ajouté au panier ! ");
-                    CartDataGrid.ItemsSource = cart;
+
+            MessageBox.Show("Machines ajouté au panier ! ");
+            CartDataGrid.ItemsSource = cart;
         }
 
 
@@ -122,7 +119,6 @@ namespace WpfApp1
             oldClientButton.Visibility = Visibility.Visible;
 
             this.newClient = true;
-
         }
         private void OldClientButton_Click(object sender, RoutedEventArgs e)
         {

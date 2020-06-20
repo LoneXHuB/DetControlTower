@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
+using System.Diagnostics;
 
 
 namespace Server
@@ -31,9 +32,11 @@ namespace Server
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(ClientManagerService), "ClientManagerService", WellKnownObjectMode.Singleton);
 
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(FactureManagerService), "FactureManagerService", WellKnownObjectMode.Singleton);
+                
 
-
-
+                Trace.TraceInformation("Started server On " + DateTime.Now.ToString());
+                Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+                Trace.AutoFlush = true;
 
 
                 Console.WriteLine("RegisteredTypes : ");
@@ -49,6 +52,8 @@ namespace Server
                 while (true) { }
 
             } catch(Exception e){
+                Trace.TraceError("Server crash On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 System.Console.WriteLine("Server Runtime Exception ...");
                 System.Console.WriteLine(e.Message);
             }

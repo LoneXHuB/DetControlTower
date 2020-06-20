@@ -61,11 +61,10 @@ namespace WpfApp1
                 {
                     AuthentificationErrorFlag.Visibility = Visibility.Visible;
                     ExceptionErrorFlag.Visibility = Visibility.Collapsed;
-
                 }
 
             }
-            catch (Exception exception)
+            catch
             {
                 AuthentificationErrorFlag.Visibility = Visibility.Collapsed;
                 ExceptionErrorFlag.Visibility = Visibility.Visible;

@@ -11,7 +11,7 @@ namespace Proxy
     public class MyGeneralConstants
     {
         //Magneto
-        public static string Host= "127.0.0.1";    
+        public static string Host= "Magneto";    
     }
 
 }

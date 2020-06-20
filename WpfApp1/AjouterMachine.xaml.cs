@@ -34,7 +34,7 @@ namespace WpfApp1
         public ObservableCollection<String> RefList { get; set; }
 
         public static string lastMachineRef = "";
-        public int AddCount = 1;
+        public int AddCount = 0;
 
         IMachineManagerService service = (IMachineManagerService)Activator
                                                .GetObject(typeof(IMachineManagerService), "tcp://" + MyGeneralConstants.Host + ":2019/MachineManagerService");
@@ -47,14 +47,13 @@ namespace WpfApp1
 
         }
 
-        private async void AjouterButton_Click(object sender, RoutedEventArgs e)
+        private void AjouterButton_Click(object sender, RoutedEventArgs e)
         {
            if( (refInput.Text == "" || desInput.Text == ""
                 || arrivalInput.Text == "" || categInput.Text == "" 
                 || providerInput.Text == "" || serialInput.Text == ""
                 || pdrInput.Text == "" || pdvInput.Text == "" || dateInput.Text == "" ) && IsNewCheckBox.IsChecked.Value)
            {
-
                 this.ShowErrorMessage("Veuillez remplir Tout les champs !");
                 return;
            }
@@ -118,7 +117,6 @@ namespace WpfApp1
             //if machine isn't new only check those three
             if ((refInput.Text == "" || arrivalInput.Text == "" || serialInput.Text == "" || dateInput.Text == "" ) && !IsNewCheckBox.IsChecked.Value)
             {
-
                 this.ShowErrorMessage("Veuillez remplir Tout les champs !");
                 return;
             }
@@ -129,7 +127,7 @@ namespace WpfApp1
                 machine.ArrivalDate = dateInput.DisplayDate;
                 machine.Serial = serialInput.Text;
 
-                if (machine.Id == "" || machine.Id == null)
+                if (machine.Id == 0)
                 {
                     this.ShowErrorMessage("La machine " + refInput.Text + " n'est pas encore en stock. \n Veuillez remplir tout les champs.");
                     IsNewCheckBox.IsChecked = true;

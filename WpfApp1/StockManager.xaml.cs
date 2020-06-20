@@ -28,15 +28,10 @@ namespace WpfApp1
     {
         IMachineManagerService service = (IMachineManagerService)Activator.GetObject(typeof(IMachineManagerService),
                                                                           "tcp://" + MyGeneralConstants.Host + ":2019/MachineManagerService");
-        private DataTable dataTable;
-
-        public DataTable DataTable { get; set; }
 
         public StockManager()
         {
-
             InitializeComponent();
-
         }
 
         public void FillDataGrid()
@@ -50,38 +45,23 @@ namespace WpfApp1
 
             DataTable DataTable = service.GetMachineList(filter , false);
 
-
             ouvragesDataGrid.DataContext = DataTable;
-
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            
             this.FillDataGrid();
-
         }
-
-        private void OuvragesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            //DataGridRow selectedRow = ((DataGridRow)((DataGrid)sender).SelectedItem);
-
-
-        }
-
+        
         private void SupprimerButton_Click(object sender, RoutedEventArgs e)
-
         {
             IList dgr = ouvragesDataGrid.SelectedItems;
 
             foreach (DataRowView row in dgr)
             {
-
-                string idMachine = row["id"].ToString();
+                int idMachine = Int32.Parse(row["id"].ToString());
                 string referance = row["ref"].ToString();
                 Machine machine = new Machine(idMachine);
-
 
                 if (service.RemoveMachine(machine))
                     MessageBox.Show("Machine Supprimé!\n referance : " + referance);
@@ -90,43 +70,28 @@ namespace WpfApp1
             }
 
             this.FillDataGrid();
-
-
-
-
         }
-
-
-
-
-
-
+        
         private void ModifierButton_Click(object sender, RoutedEventArgs e)
         {
             IList dgr = ouvragesDataGrid.SelectedItems;
 
             foreach (DataRowView row in dgr)
             {
-                string id = row["id"].ToString();
+                int id = Int32.Parse(row["id"].ToString());
                 string reference = row["ref"].ToString();
                 string categ = row["categ"].ToString();
                 string designation = row["designation"].ToString();
                 string remarque = row["remarque"].ToString();
 
-
-
-
                 Machine machine = new Machine(id , categ, designation, reference );
                 machine.Remarque = remarque;
                 
-
                     if (service.EditMachine(machine))
                     MessageBox.Show("Information Machine Modifié!\n réference : " + reference);
                 else
                     MessageBox.Show("Modification impossible !\n Reférence : " + reference + "\n Error : " + service.getMessage());
-
             }
-
             this.FillDataGrid();
         }
 
@@ -142,37 +107,30 @@ namespace WpfApp1
             categFilterInput.Text = "";
             arrivalFilterInput.Text = "";
             providerFilterInput.Text = "";
-          
         }
 
         private void ImprimStock_Click(object sender, RoutedEventArgs e)
         {
-
             DataTable dataTable = service.GetMachineList(new Machine(), true);
 
             ObservableCollection<Facturable> stockCollection = new ObservableCollection<Facturable>();
 
             foreach (DataRow row in dataTable.Rows)
             {
-                string id = row["id"].ToString();
+                int id = Int32.Parse(row["id"].ToString());
                 string reference = row["ref"].ToString();
                 string categ = row["categ"].ToString();
                 string designation = row["designation"].ToString();
                 string remarque = row["remarque"].ToString();
 
-
-
-
                 Machine machine = new Machine(id, categ, designation, reference);
                 machine.Remarque = remarque;
 
                 stockCollection.Add(machine);
-
             }
 
-                PrintStockPreview stockPreview = new PrintStockPreview( stockCollection );
+            PrintStockPreview stockPreview = new PrintStockPreview( stockCollection );
             stockPreview.Show();
         }
     }
 }
-

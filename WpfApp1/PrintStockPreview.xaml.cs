@@ -47,7 +47,7 @@ namespace WpfApp1
             InitializeComponent();
         }
 
-        private async void PrintPage()
+        private void PrintPage()
         {
             PrintDialog printer = new PrintDialog();
             if (printer.ShowDialog().GetValueOrDefault(false))

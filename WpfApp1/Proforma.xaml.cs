@@ -56,7 +56,7 @@ namespace WpfApp1
             String reference = refInput.Text;
           
 
-            Machine filter = new Machine(null , reference);
+            Machine filter = new Machine(0 , reference);
 
             DataTable dataTable = service.GetMachineList(filter , true);
 
@@ -80,7 +80,7 @@ namespace WpfApp1
             foreach (DataRowView row in selectedRows)
             {
                 Machine machine = new Machine();
-                machine.Id = row["id"].ToString();
+                machine.Id = Int32.Parse(row["id"].ToString());
                 machine.Refference = row["ref"].ToString();
                 machine.Pdv = Double.Parse(row["pdv"].ToString());
                 machine.NameF = row["namef"].ToString();

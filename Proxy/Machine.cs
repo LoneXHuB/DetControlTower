@@ -18,7 +18,6 @@ namespace Proxy
         private String refference;
         private String serial;
         private Facture facture;
-        private String id;
         private String remarque;
         
         public Machine(string serial , string categ,
@@ -37,21 +36,21 @@ namespace Proxy
             this.Facture = facture;
         }
 
-        public Machine(string id)
+        public Machine(int id)
         {
-            this.Id = id;
+            base.Id = id;
         }
-        public Machine(string id, string referance)
-        {
-            this.Id = id;
-            this.Refference = referance;
-        }
-        public Machine(string id, string referance, double pdv) : base(pdv)
+        public Machine(int id, string referance)
         {
             this.Id = id;
             this.Refference = referance;
         }
-        public Machine(string id, string referance,string provider , double pdv) : base(pdv)
+        public Machine(int id, string referance, double pdv) : base(pdv)
+        {
+            this.Id = id;
+            this.Refference = referance;
+        }
+        public Machine(int id, string referance,string provider , double pdv) : base(pdv)
         {
             this.Id = id;
             this.Refference = referance;
@@ -66,7 +65,7 @@ namespace Proxy
             this.refference = refference;
             this.Facture = facture;
         }
-        public Machine( string id,string categ , string designation, string refference) : base (designation)
+        public Machine( int id,string categ , string designation, string refference) : base (designation)
         {
             this.categ = categ;
             this.Id = id;
@@ -84,7 +83,6 @@ namespace Proxy
         public string Refference { get => refference; set => refference = value; }
         public string Serial { get => serial; set => serial = value; }
         public Facture Facture { get => facture; set => facture = value; }
-        public String Id { get => id; set => id = value; }
         public string Remarque { get => remarque; set => remarque = value; }
     }
 }

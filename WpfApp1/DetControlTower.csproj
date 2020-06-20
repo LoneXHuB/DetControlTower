@@ -28,7 +28,7 @@
     <InstallUrl>http://detcontroltower.000webhostapp.com/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.html</WebPage>
-    <ApplicationRevision>42</ApplicationRevision>
+    <ApplicationRevision>43</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -111,7 +111,6 @@
     <Compile Include="FacturerIntervention.xaml.cs">
       <DependentUpon>FacturerIntervention.xaml</DependentUpon>
     </Compile>
-    <Compile Include="idPiece.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -136,9 +135,6 @@
     </Compile>
     <Compile Include="PrintPreview.xaml.cs">
       <DependentUpon>PrintPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StockPiece.xaml.cs">
-      <DependentUpon>StockPiece.xaml</DependentUpon>
     </Compile>
     <Page Include="AjouterIntervention.xaml">
       <SubType>Designer</SubType>
@@ -196,10 +192,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PrintPreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="StockPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

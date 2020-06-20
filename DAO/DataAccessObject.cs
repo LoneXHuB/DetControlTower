@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,6 @@ namespace DAO
             if (!cnx.Ping())
                cnx.Open();
             
-
         }
         
         public bool modifierFacture(Facture facture)
@@ -59,6 +59,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
             }
@@ -98,7 +100,7 @@ namespace DAO
 
             while (reader.Read())
             {
-                machine.Id = reader["id"].ToString();
+                machine.Id = Int32.Parse(reader["id"].ToString());
                 machine.Refference = reader["ref"].ToString();
                 machine.Designation = reader["designation"].ToString();
                 machine.ArrivalNumber = reader["num_arrivage"].ToString();
@@ -225,6 +227,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
 
@@ -251,6 +255,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
 
@@ -353,7 +359,7 @@ namespace DAO
             {
                 Machine machine = new Machine();
 
-                machine.Id = reader["id"].ToString();
+                machine.Id = Int32.Parse(reader["id"].ToString());
                 machine.Categ = reader["categ"].ToString();
                 machine.Designation = reader["designation"].ToString();
                 machine.State = reader["etat"].ToString();
@@ -432,6 +438,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
             }
@@ -457,6 +465,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
             }
@@ -482,6 +492,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
             }
@@ -541,6 +553,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
 
@@ -646,6 +660,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
             }
@@ -672,6 +688,8 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
             }
@@ -705,9 +723,10 @@ namespace DAO
             }
             catch (MySqlException e)
             {
+                Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                Trace.WriteLine(e.StackTrace);
                 this.Message = e.Message;
                 return false;
-
             }
         }
 
@@ -738,6 +757,8 @@ namespace DAO
                     Int32.TryParse(reader.GetString(0) , out id);
                 }catch(Exception e)
                 {
+                    Trace.TraceError("Method Failure On : " + DateTime.Now.ToString());
+                    Trace.WriteLine(e.StackTrace);
                     Console.WriteLine(e.Message);
                     return 0;
                 }
@@ -748,12 +769,5 @@ namespace DAO
 
             return id;
         }
-
-
-
-
-
-
-
     }
 }

@@ -57,7 +57,7 @@
 
 
 
-            <DataGrid x:Name="ouvragesDataGrid" SelectionUnit="FullRow" Height="424" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False" SelectionChanged="OuvragesDataGrid_SelectionChanged" >
+            <DataGrid x:Name="ouvragesDataGrid" SelectionUnit="FullRow" Height="424" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="50" IsReadOnly="True"/>
