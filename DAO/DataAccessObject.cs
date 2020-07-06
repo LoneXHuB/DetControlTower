@@ -14,7 +14,7 @@ namespace DAO
 {
     public class DataAccessObject
     {
-        // private MySqlConnection cnx =  new Connection("remotemysql.com  ", "V7szH3JQU3", "IgoEOmSAwE", "V7szH3JQU3").Cnx;
+        //private MySqlConnection cnx =  new Connection("remotemysql.com  ", "V7szH3JQU3", "IgoEOmSAwE", "V7szH3JQU3").Cnx;
         private MySqlConnection cnx = new Connection("localhost", "root", "admin", "detcontroltower").Cnx;
         private String message = "";
 
@@ -33,9 +33,9 @@ namespace DAO
             Console.WriteLine(cnx.Ping());
 
             Console.WriteLine("Connecting to database ....");
+
             if (!cnx.Ping())
                cnx.Open();
-            
         }
         
         public bool modifierFacture(Facture facture)
@@ -144,7 +144,7 @@ namespace DAO
 
         public DataTable GetTacheList(Tache filter)
         {
-            String query = "SELECT * FROM tache";
+            String query = "SELECT * FROM tache WHERE designation LIKE \"" + filter.Designation +"%\"";
 
             Console.WriteLine("==>Query: " + query);
 
@@ -162,7 +162,7 @@ namespace DAO
 
         public bool AddTache(Tache tache)
         {
-            String query = "INSERT INTO tache (designation , prix, date_creation) VALUES (\"" + tache.Designation + "\" , \"" + tache.Pdv + "\", \"" + tache.CreationDate.ToString("yyyy-MM-dd HH:mm:ss") + "\")";
+            String query = "INSERT INTO tache (designation , pdv, date_creation) VALUES (\"" + tache.Designation + "\" , \"" + tache.Pdv + "\", \"" + tache.CreationDate.ToString("yyyy-MM-dd HH:mm:ss") + "\")";
 
             MySqlCommand command = new MySqlCommand(query, cnx);
 

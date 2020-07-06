@@ -108,6 +108,10 @@
     <Compile Include="BiblioWindow.xaml.cs">
       <DependentUpon>BiblioWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CollectionEventArgs.cs" />
+    <Compile Include="CustomizeAvoirPopup.xaml.cs">
+      <DependentUpon>CustomizeAvoirPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FacturerIntervention.xaml.cs">
       <DependentUpon>FacturerIntervention.xaml</DependentUpon>
     </Compile>
@@ -159,6 +163,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="CustomizeAvoirPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FacturerIntervention.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

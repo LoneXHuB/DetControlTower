@@ -95,14 +95,9 @@
 
             </ListView>
 
-
-
-
-
-
             <Rectangle Fill="{x:Null}" HorizontalAlignment="Left" Panel.ZIndex="0" Height="136" Margin="10,132,0,0" Stroke="DarkGray" VerticalAlignment="Top" Width="572"/>
 
-            <StackPanel Orientation="Horizontal" Margin="20,242,16,177">
+            <StackPanel Orientation="Horizontal" Margin="20,242,232,177">
                 <TextBlock Text="Activité : " Width="50" HorizontalAlignment="Left" FontSize="10" Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
                 <TextBlock x:Name="clientActivity" Text="data" FontSize="10"  HorizontalAlignment="Left"  Foreground="#555" FontFamily="SegoUi"/>
             </StackPanel>
@@ -140,8 +135,8 @@
                 </ListView>
 
 
-                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" Width="187" >
-                    <ListViewItem Width="200">
+                <ListView Panel.ZIndex="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,10,0,25" Width="177" >
+                    <ListViewItem Width="177">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Adrèsse : "  HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
                             <TextBlock x:Name="clientAddress" Text="data"  FontSize="10" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
@@ -149,7 +144,7 @@
                                        HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Width="200">
+                    <ListViewItem Width="177">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="N.I.F : " Width="44" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
                             <TextBlock x:Name="clientNif" FontSize="10" Text="data" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
@@ -157,7 +152,7 @@
                                        HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Width="200">
+                    <ListViewItem Width="177">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="RC/CA : " Width="44" HorizontalAlignment="Left" FontSize="10"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
                             <TextBlock x:Name="RegNumber" Text="data" FontSize="10"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
@@ -186,14 +181,13 @@
                             <TextBlock x:Name="date" Text="data"   HorizontalAlignment="Left"  FontSize="10" Foreground="#555" FontFamily="SegoUi"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Width="200">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="payment : " Width="48" HorizontalAlignment="Left" FontSize="10"   Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
-                            <TextBlock x:Name="paymentType" Text="data"   HorizontalAlignment="Left" FontSize="10" TextWrapping="Wrap" MaxWidth="120" Foreground="#555" FontFamily="SegoUi" Width="120" Height="44"/>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal" Width="198">
+                            <TextBlock Text="payment : " Width="52" HorizontalAlignment="Left" FontSize="10"   Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
+                            <TextBlock x:Name="paymentType" Text="data"   HorizontalAlignment="Left" FontSize="10" TextWrapping="Wrap" MaxWidth="120" Foreground="#555" FontFamily="SegoUi" Width="145" Height="61"/>
                         </StackPanel>
                     </ListViewItem>
-                   
-
+                    
                 </ListView>
 
             </StackPanel>
@@ -205,7 +199,7 @@
 
                     <DataGridTextColumn Header="Ref." Binding="{Binding Refference}"/>
 
-                    <DataGridTextColumn Header="Designation" Binding="{Binding Designation}"  Width="300">
+                    <DataGridTextColumn Header="Designation" Binding="{Binding Designation}"  Width="280">
                         <DataGridTextColumn.ElementStyle >
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -220,23 +214,17 @@
 
                     </DataGridTextColumn>
 
-
                     <DataGridTextColumn Header="Quantité" Binding="{Binding Quantity}"/>
-                    <DataGridTextColumn Header="Prix Unitair HT" Binding="{Binding Pdv}"/>
-
-
+                    <DataGridTextColumn Header="Prix Unitair HT" Binding="{Binding Pdv , StringFormat=N}"/>
 
                 </DataGrid.Columns>
 
-
-
             </DataGrid>
-
 
             <Grid Margin="410,268,0,50" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition  Width="100"/>
-                    <ColumnDefinition  Width="100"/>
+                    <ColumnDefinition  Width="70"/>
+                    <ColumnDefinition  Width="130"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -249,19 +237,19 @@
 
 
                 <TextBlock Text="Total HT : " Grid.Column="0" Grid.Row="0" Width="50" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
-                <TextBlock x:Name="totalHt" Grid.Column="1" Grid.Row="0" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                <TextBlock x:Name="totalHt" Grid.Column="1" Grid.Row="0" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" Width="23"/>
 
                 <TextBlock Text="Remise: " Grid.Column="0" Grid.Row="1" Width="50" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
-                <TextBlock x:Name="remise" Grid.Column="1" Grid.Row="1" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                <TextBlock x:Name="remise" Grid.Column="1" Grid.Row="1" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" Width="23"/>
 
                 <TextBlock Text="Total HT2 : " Grid.Column="0" Grid.Row="2" Width="70" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
-                <TextBlock x:Name="totalHt2" Grid.Column="1" Grid.Row="2" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                <TextBlock x:Name="totalHt2" Grid.Column="1" Grid.Row="2" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" Width="23"/>
 
                 <TextBlock Text="TVA 19% : " Grid.Column="0" Grid.Row="3" Width="70" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
-                <TextBlock x:Name="tva" Grid.Column="1" Grid.Row="3" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" />
+                <TextBlock x:Name="tva" Grid.Column="1" Grid.Row="3" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" Width="23" />
 
                 <TextBlock Text="Total TTC : " Grid.Column="0" Grid.Row="4" Width="50" HorizontalAlignment="Left"  Foreground="#555" FontWeight="DemiBold" FontFamily="SegoUi"/>
-                <TextBlock x:Name="total" Grid.Column="1" Grid.Row="4" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi"/>
+                <TextBlock x:Name="total" Grid.Column="1" Grid.Row="4" Text="data"   HorizontalAlignment="Left" Foreground="#555" FontFamily="SegoUi" Width="23"/>
 
             </Grid>
             <TextBlock Text="Montant en Lettres" FontFamily="SegoUi" FontWeight="Bold" FontSize="18" Height="20" Foreground="#666" Margin="10,205,0,175" Grid.Row="1"/>

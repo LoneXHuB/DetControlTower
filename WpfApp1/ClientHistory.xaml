@@ -21,7 +21,6 @@
 
                 </Grid.ColumnDefinitions>
 
-
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <Label VerticalAlignment="Center" Foreground="White"   Content="Nom Client" />
                     <TextBox x:Name="clientNameInput" Width="169" Height="25" FontSize="12" Margin="10,14,0,14" Background="White" TextChanged="FilterActivated"></TextBox>
@@ -32,18 +31,11 @@
                     <TextBox  x:Name="idFactureInput" Width="141" Height="25" FontSize="12" Margin="10,14,0,14" Background="White" TextChanged="FilterActivated"></TextBox>
                 </StackPanel>
 
-
-
-
-
                 <StackPanel Grid.Column="5" HorizontalAlignment="Right" Orientation="Horizontal">
                     <Button Width="180" Content="Reinitialiser Filtre" FontWeight="Bold" BorderThickness="0" BorderBrush="{x:Null}" Height="53" Click="ReinitFilter_Click"  ></Button>
                 </StackPanel>
 
-
             </Grid>
-
-
 
             <DataGrid x:Name="facturesDataGrid" SelectionUnit="FullRow" Height="424" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False" SelectionChanged="OuvragesDataGrid_SelectionChanged" >
 
@@ -58,14 +50,9 @@
                     <DataGridTextColumn Header="Essaie" Binding="{Binding trial}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Methode" Binding="{Binding pay_method}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Montant payé" Binding="{Binding payed ,StringFormat=C}" IsReadOnly="True"/>
-
-
                 </DataGrid.Columns>
 
-
-
             </DataGrid>
-
 
             <Grid Background="#555" Height="53">
                 <Grid.ColumnDefinitions>
@@ -88,7 +75,6 @@
             </Grid>
 
         </StackPanel>
-
 
     </Grid>
 </Page>

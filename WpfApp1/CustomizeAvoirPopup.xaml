@@ -1,0 +1,41 @@
+﻿<Window x:Class="DetControlTower.CustomizeAvoirPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DetControlTower"
+        mc:Ignorable="d"
+        Title="Machines à rendre" Height="450" Width="577.698"  Loaded="Window_Loaded">
+    <Grid>
+        <DataGrid x:Name="machineDataGrid" ItemsSource="{Binding}"
+          AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="120" Header="Réference" Binding="{Binding Refference}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="100" Header="Fournisseur" Binding="{Binding NameF}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="90" Header="Etat" Binding="{Binding State}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="130" Header="Prix" Binding="{Binding Pdr ,StringFormat=N}" IsReadOnly="True"/>
+
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="X"
+                            Command="Delete"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Width="100" Content="Imprimer" Click="Imprimer_Click"/>
+            <Button Width="100" Content="Annuler" BorderBrush="Red" Click="Annuler_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE60000" Offset="0"/>
+                        <GradientStop Color="#FFE20000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

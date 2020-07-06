@@ -25,7 +25,7 @@
                 <DataGridTextColumn Width="120" Header="Catégorie" Binding="{Binding categ}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="100" Header="Fournisseur" Binding="{Binding namef}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="90" Header="Etat" Binding="{Binding etat}" IsReadOnly="True"/>
-                <DataGridTextColumn Width="100" Header="Prix" Binding="{Binding pdv ,StringFormat=C}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="100" Header="Prix" Binding="{Binding pdv ,StringFormat=N}" IsReadOnly="True"/>
 
             </DataGrid.Columns>
 
@@ -40,8 +40,9 @@
             <DataGrid x:Name="CartDataGrid" Height="182" AutoGenerateColumns="False"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="120" Header="Référence" Binding="{Binding Refference}" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="335" Header="Désignation" Binding="{Binding Designation}" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="100"  Header="prix" Binding="{Binding Pdv,StringFormat=C}" IsReadOnly="True" />
+                    <DataGridTextColumn Width="235" Header="Désignation" Binding="{Binding Designation}" IsReadOnly="True"/>
+                    <DataGridTextColumn Width="100" Header="Quantité" Binding="{Binding Quantity}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="prix" Binding="{Binding Pdv,StringFormat=N}" IsReadOnly="True" />
 
                 </DataGrid.Columns>
             </DataGrid>

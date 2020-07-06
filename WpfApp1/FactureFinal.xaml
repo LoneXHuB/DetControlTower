@@ -15,7 +15,7 @@
         <StackPanel Orientation="Horizontal"  Background="#FF272727" Margin="0,0,412,473">
             <Label VerticalAlignment="Center" Content="Réfference" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
             <TextBox x:Name="refInput" Width="250" Margin="20 0 40 0" Height="25" Background="White" TextChanged="RefferenceFilter_Changed" />
-            <Button Height="56" Width="183" Content="Ajouter" Background="#FF0CA80C" FontWeight="DemiBold" Foreground="White" Click="AddToCart_Click" Margin="37,0,0,0" BorderBrush="#FF21F32B"/>
+            <Button Height="Auto" Width="184" Content="Ajouter" Background="#FF0CA80C" FontWeight="DemiBold" Foreground="White" Click="AddToCart_Click" Margin="37,0,0,0" BorderBrush="#FF21F32B"/>
         </StackPanel>
         <DataGrid x:Name="MachinesDataGrid"  SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False" Margin="0,57,412,250" >
 
@@ -25,7 +25,7 @@
                 <DataGridTextColumn Width="120" Header="Catégorie" Binding="{Binding categ}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="100" Header="Fournisseur" Binding="{Binding namef}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="90" Header="Etat" Binding="{Binding etat}" IsReadOnly="True"/>
-                <DataGridTextColumn Width="120" Header="Prix" Binding="{Binding pdv ,StringFormat=C}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="120" Header="Prix" Binding="{Binding pdv ,StringFormat=N}" IsReadOnly="True"/>
 
             </DataGrid.Columns>
 
@@ -40,8 +40,9 @@
             <DataGrid x:Name="CartDataGrid" Height="186" AutoGenerateColumns="False"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="120" Header="Référence" Binding="{Binding Refference}" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="335" Header="Désignation" Binding="{Binding Designation}" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="140"  Header="prix" Binding="{Binding Pdv,StringFormat=C}" IsReadOnly="True" />
+                    <DataGridTextColumn Width="235" Header="Désignation" Binding="{Binding Designation}" IsReadOnly="True"/>
+                    <DataGridTextColumn Width="100" Header="Quantité" Binding="{Binding Quantity}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="prix" Binding="{Binding Pdv,StringFormat=N}" IsReadOnly="True" />
 
                 </DataGrid.Columns>
             </DataGrid>
@@ -82,8 +83,6 @@
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
-
-
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center"  x:Name="nameRow" Visibility="Collapsed">
@@ -108,7 +107,7 @@
 
 
                 <Label Grid.Row="3" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" Content="Email" FontSize="16" />
-				<TextBox x:Name="emailInput"  Grid.Row="3" CharacterCasing="Lower" BorderThickness="1" Margin="100,6,0,4" Height="30" Width="224" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Left"
+                <TextBox x:Name="emailInput"  Grid.Row="3" CharacterCasing="Lower" BorderThickness="1" Margin="100,6,0,4" Height="30" Width="224" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Left"
                           behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding ClientList}"/>
 
                 <Button x:Name="newClientButton" Click="NewClientButton_Click" Grid.Row="3" Panel.ZIndex="4" HorizontalAlignment="Right" Padding="0 0" Background="#FF0CA80C" Height="35" Width="35" Margin="0,0,10,0">
@@ -161,17 +160,9 @@
                         <ComboBoxItem Content="Versement"/>
                         <ComboBoxItem Content="Virement"/>
                     </ComboBox>
-                    <TextBox x:Name="modPayInput"   Grid.Row="7" BorderThickness="1" Margin="0,5,0,5" Height="30" Width="169" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right" />
-
+                    <TextBox x:Name="modPayInput"   Grid.Row="7" BorderThickness="1" Margin="0,5,0,5" Height="30" Width="169" TextWrapping="Wrap"   Background="White" Foreground="#FF343333" HorizontalAlignment="Right"/>
                 </StackPanel>
-
-
-
-
-
-
             </Grid>
-
 
         </StackPanel>
 

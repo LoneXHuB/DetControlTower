@@ -14,24 +14,24 @@
     <Grid Background="White" >
         <StackPanel Orientation="Horizontal"  Background="#FF272727" Margin="0,0,412,473">
             <Label VerticalAlignment="Center" Content="Designation" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
-            <TextBox x:Name="refInput" Width="250" Margin="20 0 40 0" Height="25" Background="White" TextChanged="RefferenceFilter_Changed" />
+            <TextBox x:Name="desInput" Width="250" Margin="20 0 40 0" Height="25" Background="White" TextChanged="DesignationFilter_Changed" />
             <Button Height="56" Width="177" Content="Ajouter" Background="#FF0CA80C" FontWeight="DemiBold" Foreground="White" Click="AddToCart_Click" Margin="37,0,0,1" BorderBrush="#FF21F32B"/>
         </StackPanel>
+        
         <DataGrid x:Name="MachinesDataGrid"  SelectionUnit="FullRow" AutoGenerateColumns="False" CanUserAddRows="False"  CanUserReorderColumns="False" ItemsSource="{Binding}"  CanUserDeleteRows="False" CanUserResizeRows="False" Margin="0,57,412,250" >
-
             <DataGrid.Columns>
                 <DataGridTextColumn Width="450" Header="Designation" Binding="{Binding designation}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="110" Header="Prix" Binding="{Binding pdv ,StringFormat=C}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <StackPanel Background="#FFFAFAFA" Margin="0,280,412,0">
-            
+
             <StackPanel Orientation="Horizontal" Height="28" Background="#FFC5C5C5" >
                 <Label Content="Panier" FontSize="16" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Center"/>
                 <Button Margin="455,0" Content="Vider Panier" Height="Auto" Width="108" Click="EmptyCart_Click"/>
             </StackPanel>
-        
+
             <DataGrid x:Name="CartDataGrid" Height="189" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="400" Header="Designation" Binding="{Binding Designation}" IsReadOnly="True"/>
@@ -39,7 +39,7 @@
                     <DataGridTextColumn Width="110" Header="Prix" Binding="{Binding Pdv ,StringFormat=C}" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
-            
+
             <StackPanel Orientation="Horizontal"  Background="#FF272727" Margin="0,0,0,473" Height="37">
                 <Label VerticalAlignment="Center" Content="Remise" FontFamily="SegoUi" Foreground="#EEE" FontSize="16" FontWeight="DemiBold"  />
                 <TextBox x:Name="remiseInput" Padding="0" TextAlignment="Center" Text="0" Width="90" Margin="20,6,40,6" Height="25" Background="White"  />
@@ -173,8 +173,9 @@
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" Panel.ZIndex="3" Margin="618,481,0,0" Background="#FAFAFAFA" >
-            <Button   x:Name="AjouterBtn" HorizontalAlignment="Left" Margin="30,10,30,9" Foreground="WhiteSmoke" Content="Facturer intervention"  Background="#FF0CA80C" Height="30" Width="170"  BorderBrush="#FF4ADA3C" Click="InterventionButton_Click"/>
-            <Button   x:Name="ViderBtn"  HorizontalAlignment="Left"  Margin="20 0" Foreground="WhiteSmoke" Content="Vider"  Background="#FF7C7C7C" Height="30" Width="150"  BorderBrush="#FF868787" Click="ViderButton_Click"/>
+            <Button   x:Name="ProformaBtn" HorizontalAlignment="Left" Margin="30,10,30,9" Foreground="WhiteSmoke" Content="Proforma"  Background="#FF0CA80C" Height="30" Width="98"  BorderBrush="#FF4ADA3C" Click="InterventionButton_Click"/>
+            <Button   x:Name="FactureBtn" HorizontalAlignment="Left" Margin="0,10,30,9" Foreground="WhiteSmoke" Content="Final"  Background="#FF0CA80C" Height="30" Width="98"  BorderBrush="#FF4ADA3C" Click="InterventionButton_Click"/>
+            <Button   x:Name="ViderBtn"  HorizontalAlignment="Left"  Margin="20,10,20,9" Foreground="WhiteSmoke" Content="Vider"  Background="#FF7C7C7C" Height="30" Width="94"  BorderBrush="#FF868787" Click="ViderButton_Click"/>
         </StackPanel>
     </Grid>
 

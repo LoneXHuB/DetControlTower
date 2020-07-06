@@ -20,14 +20,16 @@
 -if machine en stock no need to fill form--check
 -supprimer machine not working-------------check
 -add error Log-----------------------------check
--facture avoir customisé-------------------
+-intervention facture final button---------check
+-tache search by designation not working---check	
+-facture avoir customisé-------------------check
+-waranty info mst be dffrntin in intrvntn--
+-imprimer le stock-------------------------
 -pv d'essai--------------------------------
 -pv de recu--------------------------------
 -bon de livraison -------------------------
--imprimer le stock-------------------------
 -cloude storage----------------------------
 -capitalize machine ref and provider in DB-
--intervention facture final button---------
 -client info display's gotta be fixed dog--
 
 28469Hash50Inj2ct

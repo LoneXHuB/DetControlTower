@@ -17,6 +17,7 @@ using System.Data;
 using System.Collections;
 using System.Collections.ObjectModel;
 using DetControlTower;
+using System.Threading;
 
 namespace WpfApp1
 {
@@ -32,9 +33,7 @@ namespace WpfApp1
 
         public ClientHistory()
         {
-
             InitializeComponent();
-
         }
 
         public void FillDataGrid()
@@ -44,44 +43,31 @@ namespace WpfApp1
             String clientName = clientNameInput.Text;
             String idFacture = idFactureInput.Text;
 
-           
-                filter = new Facture(idFacture);
-                
-           
-            
+            filter = new Facture(idFacture);
           
             filter.Client.Name = clientName;
 
             DataTable dataTable = service.getFilteredFactureList(filter);
 
-
             facturesDataGrid.DataContext = dataTable;
-
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-
             this.FillDataGrid();
-
         }
 
         private void OuvragesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             //DataGridRow selectedRow = ((DataGridRow)((DataGrid)sender).SelectedItem);
-
-
         }
 
         private void SupprimerButton_Click(object sender, RoutedEventArgs e)
-
         {
             IList dgr = facturesDataGrid.SelectedItems;
 
             foreach (DataRowView row in dgr)
             {
-
                 string idFacture = row["id_facture"].ToString();
 
                 MessageBoxResult dialogResult =MessageBox.Show("Etes vous sur de vouloir Annuler cette facture ?",
@@ -89,50 +75,47 @@ namespace WpfApp1
 
                 if (dialogResult == MessageBoxResult.Yes)
                 {
-
                     Facture facture = this.FillFactureFromRow(row);
-
 
                     if (facture.Type.Equals("Facture Avoir"))
                         MessageBox.Show("Creation de la facture avoir impossible! \n la facture source est une facture Avoir .");
                     else
                     {
                         ObservableCollection<Machine> cart = service.GetFactureMachineList(facture);
-
-                        facture.Type = "Facture Avoir";
-                        facture.UpdateId();
-                  
-                        if (service.Save(facture))
-                        {
-                            foreach (Machine machine in cart)
-                            {
-                                machine.State = "Rendu en Stock";
-                                machine.IdFacture = facture.IdFacture;
-                                machine.TypeFacture = facture.Type;
-                                serviceMachine.UpdateMachine(machine);
-                            }
-                            MessageBox.Show("Facture Annulée!\n id : " + idFacture);
-                        }
-                        else
-                            MessageBox.Show("Annulation impossible !\n id : " + idFacture + "\n Error : " + service.getMessage());
-
+                        
+                        CustomizeAvoirPopup customizeAvoir = new CustomizeAvoirPopup(facture, cart);
+                        customizeAvoir.PrintClicked += OnPrintClicked;
+                        customizeAvoir.ShowDialog();
                     }
-
                 }
-               
             }
 
             this.FillDataGrid();
-
-
-
-
         }
 
+        private void OnPrintClicked(object sender , FactureEventArgs<Machine> args )
+        {
+            Facture facture = args.Facture;
+            facture.Type = "Facture Avoir";
+            facture.UpdateId();
 
+            if (service.Save(facture))
+            {
+                foreach (Machine machine in args.Collection)
+                {
+                    machine.State = "Rendu en Stock";
+                    machine.IdFacture = facture.IdFacture;
+                    machine.TypeFacture = facture.Type;
+                    serviceMachine.UpdateMachine(machine);
+                }
 
-
-
+                MessageBox.Show("Facture Annulée!\n id : " + facture.IdFacture);
+                PrintPreview printWindow = new PrintPreview(facture, args.Collection);
+                printWindow.Show();
+            }
+            else
+                MessageBox.Show("Annulation impossible !\n id : " + facture.IdFacture + "\n Error : " + service.getMessage());
+        }
 
         private void ModifierButton_Click(object sender, RoutedEventArgs e)
         {
@@ -144,24 +127,18 @@ namespace WpfApp1
                 string state = row["state"].ToString();
                 string type = row["type"].ToString();
 
-
-
-
                 Facture facture = new Facture(id);
                 facture.State = state;
                 facture.Type = type;
 
-
-                    if (service.EditFacture(facture))
+                if (service.EditFacture(facture))
                     MessageBox.Show("Etat Facture Modifié!\n id : " + id);
                 else
                     MessageBox.Show("Modification impossible !\n id : " + id + "\n Error : " + service.getMessage());
-
             }
 
             this.FillDataGrid();
         }
-
 
         private void FilterActivated(object sender, TextChangedEventArgs e)
         {
@@ -171,14 +148,11 @@ namespace WpfApp1
         private void ReinitFilter_Click(object sender, RoutedEventArgs e)
         {
             clientNameInput.Text = "";
-            idFactureInput.Text = ""; 
-          
+            idFactureInput.Text = "";
         }
 
         private void ImprimerButton_Click(object sender, RoutedEventArgs e)
         {
-         
-
             IList dgr = facturesDataGrid.SelectedItems;
 
             foreach (DataRowView row in dgr)
@@ -198,10 +172,7 @@ namespace WpfApp1
                     printWindow = new PrintPreview(facture , machineCollection );
 
                 printWindow.Show();
-
-
             }
-
             this.FillDataGrid();
         }
         
@@ -216,7 +187,6 @@ namespace WpfApp1
             DateTime date = Convert.ToDateTime(row["date_fact"].ToString());
             string payMethod = row["pay_method"].ToString();
 
-
             //client INFO
 
             string name = row["name"].ToString();
@@ -228,7 +198,6 @@ namespace WpfApp1
             string regNumber = row["reg_number"].ToString();
             string carteArt = row["carteArt"].ToString();
             string article = row["article"].ToString();
-
 
             Facture facture = new Facture(id);
             facture.State = state;
@@ -242,7 +211,6 @@ namespace WpfApp1
             facture.Client = new Client(activity, address, article, email, mobile, name, nif, regNumber, carteArt);
 
             return facture;
-
         }
     }
 }

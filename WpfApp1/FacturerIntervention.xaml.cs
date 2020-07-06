@@ -52,9 +52,7 @@ namespace DetControlTower
 
         public void FillDataGrid()
         {
-            String reference = refInput.Text;
-
-            Tache filter = new Tache("");
+            Tache filter = new Tache(desInput.Text);
 
             DataTable dataTable = service.GetTacheList(filter);
 
@@ -161,7 +159,8 @@ namespace DetControlTower
         private void InterventionButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Etes vous sur de vouloir enregistrer cette facture ?", "Attention !", MessageBoxButton.YesNo);
-
+            String callerButton = ((Button)sender).Content.ToString();
+            
             if (dialogResult == MessageBoxResult.Yes)
             {
                 if ((nameInput.Text == "" ||
@@ -208,8 +207,11 @@ namespace DetControlTower
                 
                 string payMeth = ((ComboBoxItem)methodInput.SelectedItem).Content.ToString() + " " + modPayInput.Text;
 
-                this.factureF = new Facture(DateTime.Now, payMeth, 0.0, "Non Livrée", false, "Facture", null, client);
-                
+                if(callerButton == "Final")
+                    this.factureF = new Facture(DateTime.Now, payMeth, 0.0, "Non Livrée", false, "Facture", null, client);
+                else if (callerButton == "Proforma")
+                    this.factureF = new Facture(DateTime.Now, payMeth, 0.0, "Non Livrée", false, "Facture Proforma", null, client);
+
                 String garantie = ((ComboBoxItem)garantieInput.SelectedItem).Content.ToString();
 
                 if (Double.TryParse(remiseInput.Text, out Double remise) && Double.TryParse(timbreInput.Text, out Double timbre))
@@ -258,11 +260,6 @@ namespace DetControlTower
             activityCodeInput.Text = "";
         }
 
-        private void RefferenceFilter_Changed(object sender, TextChangedEventArgs e)
-        {
-            FillDataGrid();
-        }
-
         private void GarantieChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -299,6 +296,11 @@ namespace DetControlTower
         {
             tacheList.Clear();
             cart.Clear();
+        }
+
+        private void DesignationFilter_Changed(object sender, TextChangedEventArgs e)
+        {
+            FillDataGrid();
         }
     }
 }

@@ -68,31 +68,6 @@ namespace WpfApp1
                 facture.Client.Email = "/";
             foreach (Machine facturable in ListFacturable)
             {
-                /*if (facturable.Refference != null)
-                {
-                    if (facturable.Refference.Contains("@"))
-                        facturable.Refference = "";
-                }
-
-
-                if (!castCart.Any(cartFacturable => cartFacturable.Refference == facturable.Refference ))
-                {
-                    Cart.Add(facturable);
-                    castCart.Add(facturable);
-                }
-                else
-                {
-                    foreach (Machine cartFacturable in castCart)
-                    {
-                        if (cartFacturable.Refference.Equals(facturable.Refference))
-                        {
-                            cartFacturable.Quantity++;
-                            break;
-                        }
-                    }
-                }*/
-               
-
                 bool newMachine = true;
 
                 foreach(Machine m in castCart)
@@ -250,6 +225,7 @@ namespace WpfApp1
 
             printerControls.Visibility = Visibility.Visible;
         }
+
         private Boolean MenuClearForEmail()
         {
             this.Dispatcher.Invoke(() => {
@@ -259,6 +235,7 @@ namespace WpfApp1
             });
             return true;
         }
+
         private Boolean MenuRestore()
         {
             this.Dispatcher.Invoke(() => {
@@ -294,7 +271,7 @@ namespace WpfApp1
             foreach (Facturable facturable in Cart)
                 totalCart += facturable.Pdv*facturable.Quantity;
 
-            totalHt.Text = totalCart.ToString();
+            totalHt.Text = totalCart.ToString("N");
             clientAddress.Text = facture.Client.Address;
             clientArticle.Text = facture.Client.Article;
             clientEmail.Text = facture.Client.Email;
@@ -303,12 +280,12 @@ namespace WpfApp1
             clientNif.Text = facture.Client.Nif;
             paymentType.Text = facture.PayMethod;
             date.Text = facture.DateFacture.ToString("yyyy-MM-dd");
-            remise.Text = facture.Remise.ToString();
-            totalHt2.Text = (totalCart - facture.Remise).ToString();
-            tva.Text = (Math.Round((totalCart - facture.Remise) * 19 / 100 , 2)).ToString();
+            remise.Text = facture.Remise.ToString("N");
+            totalHt2.Text = (totalCart - facture.Remise).ToString("N");
+            tva.Text = (Math.Round((totalCart - facture.Remise) * 19 / 100 , 2)).ToString("N");
             double totalTTC = (((totalCart - facture.Remise) * 19 / 100) + (totalCart - facture.Remise) + facture.Timbre);
   
-            total.Text = Math.Round(totalTTC, 2).ToString();
+            total.Text = Math.Round(totalTTC, 2).ToString("N");
             garantie.Text = facture.Waranty;
             RegNumber.Text = facture.Client.CartArt;
             RegNumber.Text += facture.Client.RegNumber;
@@ -317,7 +294,6 @@ namespace WpfApp1
 
             amountInLetters.Text = totalTTC.ToLettres();
 
-            
             cartDataGrid.ItemsSource = this.Cart;
         }
 
